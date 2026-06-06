@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C182527912816FEF29E12B /* OnboardingView.swift */; };
+		11859336A82236EF694A243A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FA324EA86FB7CF3C25B70 /* SplashView.swift */; };
+		59989803EF5D84B56D708CE7 /* StudentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */; };
+		7516B75695CA4C185630CE2B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D888897BCB470567ECAF2D5 /* RootView.swift */; };
+		81ACFE3BF7965073AC1FC3E8 /* EduKidColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */; };
+		8F7C04D5A34E242AAC9CBEB5 /* EduKidGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */; };
+		92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */; };
+		9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */; };
+		98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590483F152569B979A6AE62 /* EduKidSpacing.swift */; };
+		AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */; };
+		C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E504E47218EF89B25F2CED7 /* AppConstants.swift */; };
+		CABDC57C6B18E6B20188B181 /* WebCookieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */; };
+		E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAF696511CC651BC8E2C4F /* Localizable.strings */; };
+		FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46108D994BBB947E350625 /* EduKidLogoView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		082FA324EA86FB7CF3C25B70 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidTypography.swift; sourceTree = "<group>"; };
+		172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCookieStore.swift; sourceTree = "<group>"; };
+		2E504E47218EF89B25F2CED7 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		2FA64EE544B2836588CF8E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4ECAF696511CC651BC8E2C4F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidGamesApp.swift; sourceTree = "<group>"; };
+		9D888897BCB470567ECAF2D5 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentWebView.swift; sourceTree = "<group>"; };
+		AF46108D994BBB947E350625 /* EduKidLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidLogoView.swift; sourceTree = "<group>"; };
+		C590483F152569B979A6AE62 /* EduKidSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidSpacing.swift; sourceTree = "<group>"; };
+		D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidColors.swift; sourceTree = "<group>"; };
+		E7C182527912816FEF29E12B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		21CE071E32CAABE8143773BB = {
+			isa = PBXGroup;
+			children = (
+				C6587BD237C96848D73CFE56 /* EduKidGames */,
+				5BB1D0D26E224639B504A197 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28A9858D4F39C8E7981A8A30 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E7C182527912816FEF29E12B /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3E6B0080D3244F45C24C1928 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				28A9858D4F39C8E7981A8A30 /* Onboarding */,
+				D9B5B290F68CF9D9F43A1692 /* Splash */,
+				8236C62903769C10B8460F55 /* Web */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		4AC41442BC831284E4F55D67 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9D888897BCB470567ECAF2D5 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		54ACE9B97341B5E377EFDD48 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */,
+				C590483F152569B979A6AE62 /* EduKidSpacing.swift */,
+				16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		5BB1D0D26E224639B504A197 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CF42819AD0F1D90B2859721 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				4ECAF696511CC651BC8E2C4F /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		620321A2CA9AAF728CC497A3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */,
+				5CF42819AD0F1D90B2859721 /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F441B6C44C59E2FEB377645 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A25BABC1F51E8A4359BF9957 /* Components */,
+				9803BFFFC51CAA1C9BE3E435 /* Constants */,
+				54ACE9B97341B5E377EFDD48 /* Theme */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8236C62903769C10B8460F55 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */,
+				172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		9803BFFFC51CAA1C9BE3E435 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				2E504E47218EF89B25F2CED7 /* AppConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		A25BABC1F51E8A4359BF9957 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AF46108D994BBB947E350625 /* EduKidLogoView.swift */,
+				13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C6587BD237C96848D73CFE56 /* EduKidGames */ = {
+			isa = PBXGroup;
+			children = (
+				88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */,
+				2FA64EE544B2836588CF8E4E /* Info.plist */,
+				4AC41442BC831284E4F55D67 /* App */,
+				6F441B6C44C59E2FEB377645 /* Core */,
+				3E6B0080D3244F45C24C1928 /* Features */,
+				620321A2CA9AAF728CC497A3 /* Resources */,
+			);
+			path = EduKidGames;
+			sourceTree = "<group>";
+		};
+		D9B5B290F68CF9D9F43A1692 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				082FA324EA86FB7CF3C25B70 /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		20252FD233D89B78A3017CCC /* EduKidGames */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8869B22701957DD01271D2F4 /* Build configuration list for PBXNativeTarget "EduKidGames" */;
+			buildPhases = (
+				8C22D3C9AAB4549615E86DB0 /* Sources */,
+				55663EB411592D67479E748B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EduKidGames;
+			packageProductDependencies = (
+			);
+			productName = EduKidGames;
+			productReference = 7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A67940060C84BC7F8332AF79 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					20252FD233D89B78A3017CCC = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FC10AEF71A6D39E62DEFC775 /* Build configuration list for PBXProject "EduKidGames" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				tr,
+			);
+			mainGroup = 21CE071E32CAABE8143773BB;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5BB1D0D26E224639B504A197 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				20252FD233D89B78A3017CCC /* EduKidGames */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55663EB411592D67479E748B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */,
+				E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8C22D3C9AAB4549615E86DB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */,
+				81ACFE3BF7965073AC1FC3E8 /* EduKidColors.swift in Sources */,
+				8F7C04D5A34E242AAC9CBEB5 /* EduKidGamesApp.swift in Sources */,
+				FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */,
+				98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */,
+				92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */,
+				0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */,
+				AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */,
+				7516B75695CA4C185630CE2B /* RootView.swift in Sources */,
+				11859336A82236EF694A243A /* SplashView.swift in Sources */,
+				59989803EF5D84B56D708CE7 /* StudentWebView.swift in Sources */,
+				CABDC57C6B18E6B20188B181 /* WebCookieStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		491F4C9602617B0B11C9E433 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		71B67A399C510B16B5C9A1AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8AFE9E3894A3AE0C4CA8F5EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EduKidGames/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "EduKid Games";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gidysoft.edukidgames;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		98B4E3BA1921D18481486146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EduKidGames/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "EduKid Games";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gidysoft.edukidgames;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8869B22701957DD01271D2F4 /* Build configuration list for PBXNativeTarget "EduKidGames" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				98B4E3BA1921D18481486146 /* Debug */,
+				8AFE9E3894A3AE0C4CA8F5EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FC10AEF71A6D39E62DEFC775 /* Build configuration list for PBXProject "EduKidGames" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				491F4C9602617B0B11C9E433 /* Debug */,
+				71B67A399C510B16B5C9A1AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A67940060C84BC7F8332AF79 /* Project object */;
+}

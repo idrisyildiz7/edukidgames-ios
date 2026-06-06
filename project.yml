@@ -1,0 +1,31 @@
+name: EduKidGames
+options:
+  bundleIdPrefix: com.gidysoft
+  deploymentTarget:
+    iOS: "16.0"
+targets:
+  EduKidGames:
+    type: application
+    platform: iOS
+    sources:
+      - EduKidGames
+    resources:
+      - EduKidGames/Resources
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.gidysoft.edukidgames
+      MARKETING_VERSION: "1.0.0"
+      CURRENT_PROJECT_VERSION: "1"
+      SWIFT_VERSION: "5.0"
+      CODE_SIGN_STYLE: Automatic
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+      INFOPLIST_KEY_CFBundleDisplayName: EduKid Games
+    info:
+      path: EduKidGames/Info.plist
+      properties:
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+          NSExceptionDomains:
+            localhost:
+              NSExceptionAllowsInsecureHTTPLoads: true
