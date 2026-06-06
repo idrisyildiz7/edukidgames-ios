@@ -1,6 +1,7 @@
 name: EduKidGames
 options:
   bundleIdPrefix: com.edukidgames
+  developmentLanguage: tr
   deploymentTarget:
     iOS: "16.0"
 targets:
@@ -24,6 +25,10 @@ targets:
     info:
       path: EduKidGames/Info.plist
       properties:
+        CFBundleDevelopmentRegion: tr
+        CFBundleLocalizations:
+          - tr
+          - en
         UIAppFonts:
           - Fonts/Fredoka.ttf
           - Fonts/Nunito.ttf

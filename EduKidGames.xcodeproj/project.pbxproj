@@ -22,7 +22,7 @@
 		AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */; };
 		C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E504E47218EF89B25F2CED7 /* AppConstants.swift */; };
 		CABDC57C6B18E6B20188B181 /* WebCookieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */; };
-		E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAF696511CC651BC8E2C4F /* Localizable.strings */; };
+		E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B4E2F1A9C3D5E7F0A1B2C4 /* Localizable.strings */; };
 		FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46108D994BBB947E350625 /* EduKidLogoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,9 @@
 		2E504E47218EF89B25F2CED7 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		2FA64EE544B2836588CF8E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageIndicator.swift; sourceTree = "<group>"; };
-		4ECAF696511CC651BC8E2C4F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1A2B3C4D5E6F708192A3B4D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4ECAF696511CC651BC8E2C4F /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B4E2F1A9C3D5E7F0A1B2C4 /* Localizable.strings */ = {isa = PBXVariantGroup; children = (1A2B3C4D5E6F708192A3B4D5 /* en */, 4ECAF696511CC651BC8E2C4F /* tr */); name = Localizable.strings; sourceTree = "<group>"; };
 		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidGamesApp.swift; sourceTree = "<group>"; };
@@ -105,7 +107,7 @@
 		5CF42819AD0F1D90B2859721 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				4ECAF696511CC651BC8E2C4F /* Localizable.strings */,
+				8B4E2F1A9C3D5E7F0A1B2C4 /* Localizable.strings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -222,7 +224,7 @@
 				};
 			};
 			buildConfigurationList = FC10AEF71A6D39E62DEFC775 /* Build configuration list for PBXProject "EduKidGames" */;
-			developmentRegion = en;
+			developmentRegion = tr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
