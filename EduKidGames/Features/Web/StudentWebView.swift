@@ -91,7 +91,16 @@ struct StudentWebView: UIViewRepresentable {
 
         @objc private func refreshLoginLayout() {
             guard let webView, let url = webView.url, isLoginPage(url) else { return }
+            webView.scrollView.setContentOffset(.zero, animated: false)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                webView.scrollView.setContentOffset(.zero, animated: false)
+                webView.evaluateJavaScript(
+                    "window.EduKidAuthApp && window.EduKidAuthApp.refreshLayout && window.EduKidAuthApp.refreshLayout();",
+                    completionHandler: nil
+                )
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
+                webView.scrollView.setContentOffset(.zero, animated: false)
                 webView.evaluateJavaScript(
                     "window.EduKidAuthApp && window.EduKidAuthApp.refreshLayout && window.EduKidAuthApp.refreshLayout();",
                     completionHandler: nil
@@ -135,7 +144,7 @@ struct StudentWebView: UIViewRepresentable {
                 existing.name = 'viewport';
                 document.head.appendChild(existing);
               }
-              existing.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content';
+              existing.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual';
               if (document.body) { document.body.style.zoom = '1'; }
             })();
             """
