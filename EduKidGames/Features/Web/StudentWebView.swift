@@ -109,9 +109,23 @@ struct StudentWebView: UIViewRepresentable {
                 existing.name = 'viewport';
                 document.head.appendChild(existing);
               }
-              existing.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+              existing.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
               if (document.body) { document.body.style.zoom = '1'; }
             })();
+            """
+            webView.evaluateJavaScript(script, completionHandler: nil)
+        }
+
+        /// WKWebView'da env(safe-area-inset-*) 0 dönebildiği için login ekranına native inset enjekte eder.
+        private func injectAuthSafeArea(in webView: WKWebView) {
+            let insets = webView.window?.safeAreaInsets
+                ?? webView.superview?.safeAreaInsets
+                ?? .zero
+            let top = max(insets.top, 0)
+            let bottom = max(insets.bottom, 0)
+            let script = """
+            document.documentElement.style.setProperty('--auth-safe-top', '\(top)px');
+            document.documentElement.style.setProperty('--auth-safe-bottom', '\(bottom)px');
             """
             webView.evaluateJavaScript(script, completionHandler: nil)
         }
@@ -132,7 +146,10 @@ struct StudentWebView: UIViewRepresentable {
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             if let currentURL = webView.url {
                 applyZoomPolicy(for: currentURL, in: webView)
-                if isLoginPage(currentURL) { enforceLoginViewport(in: webView) }
+                if isLoginPage(currentURL) {
+                    enforceLoginViewport(in: webView)
+                    injectAuthSafeArea(in: webView)
+                }
             }
             WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore)
         }
