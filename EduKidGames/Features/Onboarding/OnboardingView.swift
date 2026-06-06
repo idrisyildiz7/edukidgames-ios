@@ -80,41 +80,44 @@ private struct OnboardingPageView: View {
     let isActive: Bool
 
     var body: some View {
-        GeometryReader { proxy in
-            let cardSide = min(proxy.size.width * 0.78, proxy.size.height * 0.48, 280)
+        VStack(spacing: 0) {
+            Spacer(minLength: 4)
 
-            VStack(spacing: 28) {
-                Spacer()
-                ZStack {
-                    RoundedRectangle(cornerRadius: 32)
-                        .fill(EduKidColors.paper)
-                        .shadow(color: EduKidColors.navy.opacity(0.08), radius: 20, x: 0, y: 14)
-                    Image(page.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: cardSide * 0.82, height: cardSide * 0.82)
-                        .clipShape(RoundedRectangle(cornerRadius: 24))
-                }
-                .frame(width: cardSide, height: cardSide)
-                .scaleEffect(isActive ? 1 : 0.92)
+            Image(page.imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 340)
+                .frame(maxHeight: 300)
+                .padding(.horizontal, 12)
+                .scaleEffect(isActive ? 1 : 0.94)
+                .opacity(isActive ? 1 : 0.88)
+                .shadow(color: EduKidColors.navy.opacity(0.12), radius: 18, x: 0, y: 10)
                 .animation(.spring(response: 0.45, dampingFraction: 0.78), value: isActive)
 
-                VStack(spacing: 10) {
-                    Text(LocalizedStringKey(page.titleKey))
-                        .font(EduKidTypography.displayLarge)
-                        .foregroundStyle(EduKidColors.navy)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(LocalizedStringKey(page.subtitleKey))
-                        .font(EduKidTypography.bodyMedium)
-                        .foregroundStyle(EduKidColors.onSurfaceVariant)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .padding(.horizontal, EduKidSpacing.spacingXl)
-                Spacer()
+            Spacer(minLength: 20)
+
+            VStack(spacing: 10) {
+                Text(LocalizedStringKey(page.titleKey))
+                    .font(EduKidTypography.onboardingTitle)
+                    .foregroundStyle(EduKidColors.navy)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(2)
+                    .minimumScaleFactor(0.88)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(LocalizedStringKey(page.subtitleKey))
+                    .font(EduKidTypography.onboardingBody)
+                    .foregroundStyle(EduKidColors.onSurfaceVariant)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(3)
+                    .minimumScaleFactor(0.9)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, 28)
+            .padding(.bottom, 4)
+
+            Spacer(minLength: 8)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
