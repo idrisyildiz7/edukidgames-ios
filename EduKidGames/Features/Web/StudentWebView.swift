@@ -4,15 +4,74 @@ import WebKit
 /// Tam ekran WebView — native chrome yok; web paneli doğrudan uygulama gibi görünür.
 struct StudentWebViewContainer: View {
     private let startURL = URL(string: AppConstants.loginURL)!
+    @State private var isLoading = true
 
     var body: some View {
-        StudentWebView(url: startURL)
+        ZStack {
+            StudentWebView(url: startURL, isLoading: $isLoading)
+                .ignoresSafeArea()
+
+            if isLoading {
+                WebViewLoadingOverlay()
+                    .transition(.opacity)
+                    .zIndex(1)
+            }
+        }
+        .animation(.easeOut(duration: 0.32), value: isLoading)
+    }
+}
+
+private struct WebViewLoadingOverlay: View {
+    @State private var pulse = false
+
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [EduKidColors.gradientTop, EduKidColors.cream, EduKidColors.gradientBottom],
+                startPoint: .top,
+                endPoint: .bottom
+            )
             .ignoresSafeArea()
+
+            VStack(spacing: 28) {
+                EduKidLogoHorizontal(height: 76, maxWidth: 300, showShadow: true)
+                    .scaleEffect(pulse ? 1.02 : 0.98)
+                    .animation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true), value: pulse)
+
+                WebViewLoadingDots()
+            }
+        }
+        .onAppear { pulse = true }
+    }
+}
+
+private struct WebViewLoadingDots: View {
+    private let colors: [Color] = [
+        EduKidColors.orange,
+        Color(red: 0.18, green: 0.77, blue: 0.71),
+        Color(red: 1.0, green: 0.45, blue: 0.55)
+    ]
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1 / 30)) { timeline in
+            let t = timeline.date.timeIntervalSinceReferenceDate
+            HStack(spacing: 10) {
+                ForEach(0..<3, id: \.self) { index in
+                    let phase = sin(t * 4 + Double(index) * 0.85)
+                    Circle()
+                        .fill(colors[index])
+                        .frame(width: 11, height: 11)
+                        .offset(y: CGFloat(phase) * 5)
+                        .opacity(0.55 + (phase + 1) * 0.225)
+                }
+            }
+        }
     }
 }
 
 struct StudentWebView: UIViewRepresentable {
     let url: URL
+    @Binding var isLoading: Bool
 
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
@@ -39,14 +98,22 @@ struct StudentWebView: UIViewRepresentable {
         return webView
     }
 
-    func updateUIView(_ webView: WKWebView, context: Context) {}
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        context.coordinator.parent = self
+    }
 
-    func makeCoordinator() -> Coordinator { Coordinator() }
+    func makeCoordinator() -> Coordinator { Coordinator(parent: self) }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
+        var parent: StudentWebView
         weak var webView: WKWebView?
         private var didStartInitialLoad = false
         private var lifecycleObserved = false
+        private var loadingStartedAt = Date()
+
+        init(parent: StudentWebView) {
+            self.parent = parent
+        }
 
         private static let externalSchemes: Set<String> = ["tel", "telprompt", "sms", "mailto", "facetime"]
 
@@ -61,8 +128,31 @@ struct StudentWebView: UIViewRepresentable {
         func startInitialLoad(_ url: URL, in webView: WKWebView) {
             guard !didStartInitialLoad else { return }
             didStartInitialLoad = true
+            setLoading(true)
             WebCookieStore.restore(into: webView.configuration.websiteDataStore.httpCookieStore) {
                 webView.load(URLRequest(url: url))
+            }
+        }
+
+        private func setLoading(_ loading: Bool) {
+            DispatchQueue.main.async {
+                withAnimation(.easeOut(duration: 0.32)) {
+                    self.parent.isLoading = loading
+                }
+            }
+        }
+
+        private func beginLoading() {
+            loadingStartedAt = Date()
+            setLoading(true)
+        }
+
+        private func endLoading() {
+            let minimum: TimeInterval = 0.45
+            let elapsed = Date().timeIntervalSince(loadingStartedAt)
+            let delay = max(0, minimum - elapsed)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                self.setLoading(false)
             }
         }
 
@@ -187,6 +277,10 @@ struct StudentWebView: UIViewRepresentable {
             decisionHandler(.allow)
         }
 
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            beginLoading()
+        }
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             if let currentURL = webView.url {
                 applyZoomPolicy(for: currentURL, in: webView)
@@ -196,6 +290,17 @@ struct StudentWebView: UIViewRepresentable {
                 }
             }
             WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore)
+            endLoading()
+        }
+
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            endLoading()
+        }
+
+        func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+            let nsError = error as NSError
+            if nsError.domain == NSURLErrorDomain, nsError.code == NSURLErrorCancelled { return }
+            endLoading()
         }
 
         func webView(_ webView: WKWebView,

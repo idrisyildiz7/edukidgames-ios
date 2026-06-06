@@ -5,13 +5,57 @@ private struct OnboardingPage: Identifiable {
     let imageName: String
     let titleKey: String
     let subtitleKey: String
+    let style: OnboardVisualStyle
+}
+
+private struct OnboardVisualStyle {
+    let cardTop: Color
+    let cardBottom: Color
+    let ambient: Color
+    let shadow: Color
 }
 
 private let onboardingPages: [OnboardingPage] = [
-    OnboardingPage(id: 0, imageName: "OnboardHero", titleKey: "onboard.1.title", subtitleKey: "onboard.1.subtitle"),
-    OnboardingPage(id: 1, imageName: "OnboardGamification", titleKey: "onboard.2.title", subtitleKey: "onboard.2.subtitle"),
-    OnboardingPage(id: 2, imageName: "OnboardTracking", titleKey: "onboard.3.title", subtitleKey: "onboard.3.subtitle"),
-    OnboardingPage(id: 3, imageName: "OnboardSafety", titleKey: "onboard.4.title", subtitleKey: "onboard.4.subtitle")
+    OnboardingPage(
+        id: 0, imageName: "OnboardHero",
+        titleKey: "onboard.1.title", subtitleKey: "onboard.1.subtitle",
+        style: OnboardVisualStyle(
+            cardTop: Color(red: 1.0, green: 0.94, blue: 0.96),
+            cardBottom: Color(red: 1.0, green: 0.97, blue: 0.91),
+            ambient: Color(red: 1.0, green: 0.62, blue: 0.45).opacity(0.22),
+            shadow: Color(red: 0.92, green: 0.45, blue: 0.55).opacity(0.18)
+        )
+    ),
+    OnboardingPage(
+        id: 1, imageName: "OnboardGamification",
+        titleKey: "onboard.2.title", subtitleKey: "onboard.2.subtitle",
+        style: OnboardVisualStyle(
+            cardTop: Color(red: 1.0, green: 0.97, blue: 0.88),
+            cardBottom: Color(red: 1.0, green: 0.93, blue: 0.78),
+            ambient: Color(red: 1.0, green: 0.75, blue: 0.2).opacity(0.24),
+            shadow: Color(red: 0.95, green: 0.58, blue: 0.1).opacity(0.2)
+        )
+    ),
+    OnboardingPage(
+        id: 2, imageName: "OnboardTracking",
+        titleKey: "onboard.3.title", subtitleKey: "onboard.3.subtitle",
+        style: OnboardVisualStyle(
+            cardTop: Color(red: 0.9, green: 0.97, blue: 0.99),
+            cardBottom: Color(red: 0.93, green: 0.94, blue: 1.0),
+            ambient: Color(red: 0.18, green: 0.77, blue: 0.71).opacity(0.2),
+            shadow: Color(red: 0.12, green: 0.55, blue: 0.62).opacity(0.16)
+        )
+    ),
+    OnboardingPage(
+        id: 3, imageName: "OnboardSafety",
+        titleKey: "onboard.4.title", subtitleKey: "onboard.4.subtitle",
+        style: OnboardVisualStyle(
+            cardTop: Color(red: 0.92, green: 0.98, blue: 0.94),
+            cardBottom: Color(red: 0.9, green: 0.97, blue: 0.96),
+            ambient: Color(red: 0.45, green: 0.78, blue: 0.55).opacity(0.22),
+            shadow: Color(red: 0.22, green: 0.58, blue: 0.42).opacity(0.16)
+        )
+    )
 ]
 
 struct OnboardingView: View {
@@ -44,14 +88,10 @@ struct OnboardingView: View {
                 .padding(.horizontal, EduKidSpacing.screenPadding)
                 .padding(.top, 8)
 
-                TabView(selection: $currentPage) {
-                    ForEach(onboardingPages) { page in
-                        OnboardingPageView(page: page, isActive: currentPage == page.id)
-                            .tag(page.id)
-                    }
+                OnboardingPagingScroll(pageCount: onboardingPages.count, currentPage: $currentPage) { index, offset in
+                    OnboardingPageView(page: onboardingPages[index], pageOffset: offset)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .animation(.spring(response: 0.45, dampingFraction: 0.86), value: currentPage)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                 VStack(spacing: EduKidSpacing.spacingLg) {
                     OnboardingPageIndicator(
@@ -64,7 +104,9 @@ struct OnboardingView: View {
                         if isLastPage {
                             hasSeenOnboarding = true
                         } else {
-                            withAnimation { currentPage += 1 }
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.86)) {
+                                currentPage += 1
+                            }
                         }
                     }
                     .padding(.horizontal, EduKidSpacing.screenPadding)
@@ -77,24 +119,26 @@ struct OnboardingView: View {
 
 private struct OnboardingPageView: View {
     let page: OnboardingPage
-    let isActive: Bool
+    let pageOffset: CGFloat
+
+    private var focus: CGFloat { 1 - min(abs(pageOffset), 1) }
+    private var parallaxX: CGFloat { pageOffset * -34 }
+    private var floatY: CGFloat { pageOffset * 12 }
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 4)
+            Spacer(minLength: 6)
 
-            Image(page.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 340)
-                .frame(maxHeight: 300)
-                .padding(.horizontal, 12)
-                .scaleEffect(isActive ? 1 : 0.94)
-                .opacity(isActive ? 1 : 0.88)
-                .shadow(color: EduKidColors.navy.opacity(0.12), radius: 18, x: 0, y: 10)
-                .animation(.spring(response: 0.45, dampingFraction: 0.78), value: isActive)
+            OnboardingIllustrationCard(
+                imageName: page.imageName,
+                style: page.style,
+                focus: focus,
+                parallaxX: parallaxX,
+                floatY: floatY
+            )
+            .padding(.horizontal, 20)
 
-            Spacer(minLength: 20)
+            Spacer(minLength: 22)
 
             VStack(spacing: 10) {
                 Text(LocalizedStringKey(page.titleKey))
@@ -103,7 +147,8 @@ private struct OnboardingPageView: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(2)
                     .minimumScaleFactor(0.88)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .offset(x: parallaxX * 0.35, y: floatY * 0.25)
+                    .opacity(0.35 + focus * 0.65)
 
                 Text(LocalizedStringKey(page.subtitleKey))
                     .font(EduKidTypography.onboardingBody)
@@ -111,13 +156,65 @@ private struct OnboardingPageView: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
                     .minimumScaleFactor(0.9)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .offset(x: parallaxX * 0.2, y: floatY * 0.15)
+                    .opacity(0.4 + focus * 0.6)
             }
             .padding(.horizontal, 28)
-            .padding(.bottom, 4)
+            .padding(.bottom, 6)
 
             Spacer(minLength: 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+private struct OnboardingIllustrationCard: View {
+    let imageName: String
+    let style: OnboardVisualStyle
+    let focus: CGFloat
+    let parallaxX: CGFloat
+    let floatY: CGFloat
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            style.cardTop.opacity(0.55),
+                            style.cardBottom.opacity(0.2)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .overlay {
+                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                        .strokeBorder(Color.white.opacity(0.65), lineWidth: 1)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 260)
+                .padding(.horizontal, 8)
+                .offset(y: 18)
+                .opacity(0.85 + focus * 0.15)
+
+            Ellipse()
+                .fill(style.shadow.opacity(0.28))
+                .frame(width: 200, height: 22)
+                .blur(radius: 14)
+                .offset(y: 6)
+                .scaleEffect(0.75 + focus * 0.25)
+
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .padding(.horizontal, 12)
+                .offset(x: parallaxX, y: floatY - 6)
+                .scaleEffect(0.86 + focus * 0.14)
+                .rotationEffect(.degrees(Double(parallaxX * 0.05)))
+                .shadow(color: style.shadow.opacity(0.35), radius: 28, x: parallaxX * 0.15, y: 18)
+        }
+        .frame(maxWidth: 360)
+        .frame(height: 300)
     }
 }

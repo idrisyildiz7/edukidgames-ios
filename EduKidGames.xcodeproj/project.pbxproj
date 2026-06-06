@@ -10,11 +10,13 @@
 		0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C182527912816FEF29E12B /* OnboardingView.swift */; };
 		11859336A82236EF694A243A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FA324EA86FB7CF3C25B70 /* SplashView.swift */; };
 		33658ED142143F8CAB3151A1 /* Nunito.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28C4C600290938DD6E2138A1 /* Nunito.ttf */; };
+		3692F3626AC388A1EB383463 /* OnboardingPagingScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2B301BC44A7B1C96693B4 /* OnboardingPagingScroll.swift */; };
 		3DECB24C4227D6B561554A30 /* Fredoka.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4C079018D56F3A3F29772F /* Fredoka.ttf */; };
 		59989803EF5D84B56D708CE7 /* StudentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */; };
 		7516B75695CA4C185630CE2B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D888897BCB470567ECAF2D5 /* RootView.swift */; };
 		81ACFE3BF7965073AC1FC3E8 /* EduKidColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */; };
 		8F7C04D5A34E242AAC9CBEB5 /* EduKidGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */; };
+		8FEA4F41C26EB5A8C7AC3C03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F9E3CF53709E3A51ADED9302 /* Localizable.strings */; };
 		92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */; };
 		9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */; };
 		98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590483F152569B979A6AE62 /* EduKidSpacing.swift */; };
@@ -22,7 +24,6 @@
 		AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */; };
 		C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E504E47218EF89B25F2CED7 /* AppConstants.swift */; };
 		CABDC57C6B18E6B20188B181 /* WebCookieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */; };
-		E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B4E2F1A9C3D5E7F0A1B2C4 /* Localizable.strings */; };
 		FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46108D994BBB947E350625 /* EduKidLogoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,17 +32,17 @@
 		13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidTypography.swift; sourceTree = "<group>"; };
 		172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCookieStore.swift; sourceTree = "<group>"; };
+		25808C2E08110FA0F3F3E2B6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28C4C600290938DD6E2138A1 /* Nunito.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Nunito.ttf; sourceTree = "<group>"; };
 		2B4C079018D56F3A3F29772F /* Fredoka.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fredoka.ttf; sourceTree = "<group>"; };
 		2E504E47218EF89B25F2CED7 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		2FA64EE544B2836588CF8E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageIndicator.swift; sourceTree = "<group>"; };
-		1A2B3C4D5E6F708192A3B4D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4ECAF696511CC651BC8E2C4F /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8B4E2F1A9C3D5E7F0A1B2C4 /* Localizable.strings */ = {isa = PBXVariantGroup; children = (1A2B3C4D5E6F708192A3B4D5 /* en */, 4ECAF696511CC651BC8E2C4F /* tr */); name = Localizable.strings; sourceTree = "<group>"; };
 		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7FFBC0DA5199E8FF6C6BCDBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidGamesApp.swift; sourceTree = "<group>"; };
+		8DA2B301BC44A7B1C96693B4 /* OnboardingPagingScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPagingScroll.swift; sourceTree = "<group>"; };
 		9D888897BCB470567ECAF2D5 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentWebView.swift; sourceTree = "<group>"; };
 		AF46108D994BBB947E350625 /* EduKidLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidLogoView.swift; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */,
+				8DA2B301BC44A7B1C96693B4 /* OnboardingPagingScroll.swift */,
 				E7C182527912816FEF29E12B /* OnboardingView.swift */,
 			);
 			path = Onboarding;
@@ -107,7 +109,7 @@
 		5CF42819AD0F1D90B2859721 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				8B4E2F1A9C3D5E7F0A1B2C4 /* Localizable.strings */,
+				F9E3CF53709E3A51ADED9302 /* Localizable.strings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -250,7 +252,7 @@
 			files = (
 				9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */,
 				3DECB24C4227D6B561554A30 /* Fredoka.ttf in Resources */,
-				E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */,
+				8FEA4F41C26EB5A8C7AC3C03 /* Localizable.strings in Resources */,
 				33658ED142143F8CAB3151A1 /* Nunito.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +271,7 @@
 				98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */,
 				92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */,
 				AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */,
+				3692F3626AC388A1EB383463 /* OnboardingPagingScroll.swift in Sources */,
 				0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */,
 				AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */,
 				7516B75695CA4C185630CE2B /* RootView.swift in Sources */,
@@ -279,6 +282,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F9E3CF53709E3A51ADED9302 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FFBC0DA5199E8FF6C6BCDBD /* en */,
+				25808C2E08110FA0F3F3E2B6 /* tr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		491F4C9602617B0B11C9E433 /* Debug */ = {
