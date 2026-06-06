@@ -75,6 +75,28 @@ struct StudentWebView: UIViewRepresentable {
                 name: UIApplication.willResignActiveNotification,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(refreshLoginLayout),
+                name: UIResponder.keyboardWillChangeFrameNotification,
+                object: nil
+            )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(refreshLoginLayout),
+                name: UIResponder.keyboardWillHideNotification,
+                object: nil
+            )
+        }
+
+        @objc private func refreshLoginLayout() {
+            guard let webView, let url = webView.url, isLoginPage(url) else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                webView.evaluateJavaScript(
+                    "window.EduKidAuthApp && window.EduKidAuthApp.refreshLayout && window.EduKidAuthApp.refreshLayout();",
+                    completionHandler: nil
+                )
+            }
         }
 
         @objc private func persistCookies() {
@@ -113,7 +135,7 @@ struct StudentWebView: UIViewRepresentable {
                 existing.name = 'viewport';
                 document.head.appendChild(existing);
               }
-              existing.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
+              existing.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content';
               if (document.body) { document.body.style.zoom = '1'; }
             })();
             """
@@ -128,8 +150,12 @@ struct StudentWebView: UIViewRepresentable {
             let top = max(insets.top, 0)
             let bottom = max(insets.bottom, 0)
             let script = """
-            if (window.EduKidAuthApp && window.EduKidAuthApp.applyNativeSafeArea) {
-              window.EduKidAuthApp.applyNativeSafeArea(\(top), \(bottom));
+            if (window.EduKidAuthApp) {
+              if (window.EduKidAuthApp.applyNativeSafeArea) {
+                window.EduKidAuthApp.applyNativeSafeArea(\(top), \(bottom));
+              }
+              if (window.EduKidAuthApp.resetStableHeight) window.EduKidAuthApp.resetStableHeight();
+              if (window.EduKidAuthApp.refreshLayout) window.EduKidAuthApp.refreshLayout();
             } else {
               document.documentElement.dataset.authSafeNative = '1';
               document.documentElement.style.setProperty('--auth-safe-top', '\(top)px');
