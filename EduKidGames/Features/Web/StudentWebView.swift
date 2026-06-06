@@ -95,8 +95,12 @@ struct StudentWebView: UIViewRepresentable {
             webView.scrollView.pinchGestureRecognizer?.isEnabled = !isLogin
             webView.scrollView.minimumZoomScale = isLogin ? 1 : 0.5
             webView.scrollView.maximumZoomScale = isLogin ? 1 : 3
+            webView.scrollView.isScrollEnabled = !isLogin
+            webView.scrollView.bounces = !isLogin
+            webView.scrollView.alwaysBounceVertical = !isLogin
             if isLogin {
                 webView.scrollView.setZoomScale(1, animated: false)
+                webView.scrollView.contentOffset = .zero
             }
         }
 
@@ -124,8 +128,13 @@ struct StudentWebView: UIViewRepresentable {
             let top = max(insets.top, 0)
             let bottom = max(insets.bottom, 0)
             let script = """
-            document.documentElement.style.setProperty('--auth-safe-top', '\(top)px');
-            document.documentElement.style.setProperty('--auth-safe-bottom', '\(bottom)px');
+            if (window.EduKidAuthApp && window.EduKidAuthApp.applyNativeSafeArea) {
+              window.EduKidAuthApp.applyNativeSafeArea(\(top), \(bottom));
+            } else {
+              document.documentElement.dataset.authSafeNative = '1';
+              document.documentElement.style.setProperty('--auth-safe-top', '\(top)px');
+              document.documentElement.style.setProperty('--auth-safe-bottom', '\(bottom)px');
+            }
             """
             webView.evaluateJavaScript(script, completionHandler: nil)
         }
