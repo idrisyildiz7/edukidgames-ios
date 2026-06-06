@@ -30,11 +30,8 @@ struct OnboardingView: View {
             .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                HStack {
-                    Image("Logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 44, height: 44)
+                HStack(alignment: .center) {
+                    EduKidLogoHorizontal(height: 44, maxWidth: 200)
                     Spacer()
                     if !isLastPage {
                         Button(String(localized: "onboarding.skip")) {
