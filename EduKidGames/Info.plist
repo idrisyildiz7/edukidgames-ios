@@ -31,5 +31,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Fredoka.ttf</string>
+		<string>Fonts/Nunito.ttf</string>
+	</array>
 </dict>
 </plist>

@@ -1,69 +1,123 @@
 import SwiftUI
 
+private struct OnboardingPage: Identifiable {
+    let id: Int
+    let imageName: String
+    let titleKey: String
+    let subtitleKey: String
+}
+
+private let onboardingPages: [OnboardingPage] = [
+    OnboardingPage(id: 0, imageName: "OnboardHero", titleKey: "onboard.1.title", subtitleKey: "onboard.1.subtitle"),
+    OnboardingPage(id: 1, imageName: "OnboardGamification", titleKey: "onboard.2.title", subtitleKey: "onboard.2.subtitle"),
+    OnboardingPage(id: 2, imageName: "OnboardTracking", titleKey: "onboard.3.title", subtitleKey: "onboard.3.subtitle"),
+    OnboardingPage(id: 3, imageName: "OnboardSafety", titleKey: "onboard.4.title", subtitleKey: "onboard.4.subtitle")
+]
+
 struct OnboardingView: View {
     @AppStorage(AppConstants.onboardingSeenKey) private var hasSeenOnboarding = false
+    @State private var currentPage = 0
+
+    private var isLastPage: Bool { currentPage == onboardingPages.count - 1 }
 
     var body: some View {
         ZStack {
-            EduKidScreenBackground()
-            GeometryReader { proxy in
-                let safeBottom = proxy.safeAreaInsets.bottom
-                let heroSide = min(proxy.size.width * 0.82, proxy.size.height * 0.36, 320)
+            LinearGradient(
+                colors: [EduKidColors.gradientTop, EduKidColors.cream, EduKidColors.gradientBottom],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        Spacer().frame(height: max(proxy.safeAreaInsets.top, 16) + 16)
-                        EduKidLogoHorizontal(height: 40)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, EduKidSpacing.screenPadding)
-
-                        Spacer().frame(height: 24)
-                        heroCard(side: heroSide)
-                        Spacer().frame(height: 28)
-
-                        VStack(spacing: EduKidSpacing.spacingSm) {
-                            Text(String(localized: "onboarding.title"))
-                                .font(EduKidTypography.headlineLarge)
-                                .foregroundStyle(EduKidColors.navy)
-                                .multilineTextAlignment(.center)
-                                .fixedSize(horizontal: false, vertical: true)
-                            Text(String(localized: "onboarding.subtitle"))
-                                .font(EduKidTypography.bodyMedium)
-                                .foregroundStyle(EduKidColors.onSurfaceVariant)
-                                .multilineTextAlignment(.center)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        .padding(.horizontal, EduKidSpacing.spacingXl)
-
-                        Spacer().frame(height: 28)
-                        EduKidPrimaryButton(title: String(localized: "onboarding.button")) {
+            VStack(spacing: 0) {
+                HStack {
+                    Image("Logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 44, height: 44)
+                    Spacer()
+                    if !isLastPage {
+                        Button(String(localized: "onboarding.skip")) {
                             hasSeenOnboarding = true
                         }
-                        .padding(.horizontal, EduKidSpacing.screenPadding)
-                        Spacer().frame(height: max(safeBottom, 24) + 16)
+                        .font(EduKidTypography.bodyMedium)
+                        .foregroundStyle(EduKidColors.onSurfaceVariant)
                     }
-                    .frame(minHeight: proxy.size.height)
                 }
+                .padding(.horizontal, EduKidSpacing.screenPadding)
+                .padding(.top, 8)
+
+                TabView(selection: $currentPage) {
+                    ForEach(onboardingPages) { page in
+                        OnboardingPageView(page: page, isActive: currentPage == page.id)
+                            .tag(page.id)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .animation(.spring(response: 0.45, dampingFraction: 0.86), value: currentPage)
+
+                VStack(spacing: EduKidSpacing.spacingLg) {
+                    OnboardingPageIndicator(
+                        pageCount: onboardingPages.count,
+                        currentPage: currentPage
+                    )
+                    EduKidPrimaryButton(
+                        title: String(localized: isLastPage ? "onboarding.button" : "onboarding.next")
+                    ) {
+                        if isLastPage {
+                            hasSeenOnboarding = true
+                        } else {
+                            withAnimation { currentPage += 1 }
+                        }
+                    }
+                    .padding(.horizontal, EduKidSpacing.screenPadding)
+                }
+                .padding(.bottom, 24)
             }
         }
     }
+}
 
-    private func heroCard(side: CGFloat) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 28)
-                .fill(EduKidColors.paper)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(EduKidColors.outline, lineWidth: 1)
-                )
-                .shadow(color: EduKidColors.navy.opacity(0.06), radius: 18, x: 0, y: 12)
-            Image("Hero")
-                .resizable()
-                .scaledToFit()
-                .frame(width: side * 0.88, height: side * 0.88)
-                .clipShape(RoundedRectangle(cornerRadius: 22))
+private struct OnboardingPageView: View {
+    let page: OnboardingPage
+    let isActive: Bool
+
+    var body: some View {
+        GeometryReader { proxy in
+            let cardSide = min(proxy.size.width * 0.78, proxy.size.height * 0.48, 280)
+
+            VStack(spacing: 28) {
+                Spacer()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 32)
+                        .fill(EduKidColors.paper)
+                        .shadow(color: EduKidColors.navy.opacity(0.08), radius: 20, x: 0, y: 14)
+                    Image(page.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: cardSide * 0.82, height: cardSide * 0.82)
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                }
+                .frame(width: cardSide, height: cardSide)
+                .scaleEffect(isActive ? 1 : 0.92)
+                .animation(.spring(response: 0.45, dampingFraction: 0.78), value: isActive)
+
+                VStack(spacing: 10) {
+                    Text(LocalizedStringKey(page.titleKey))
+                        .font(EduKidTypography.displayLarge)
+                        .foregroundStyle(EduKidColors.navy)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(LocalizedStringKey(page.subtitleKey))
+                        .font(EduKidTypography.bodyMedium)
+                        .foregroundStyle(EduKidColors.onSurfaceVariant)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.horizontal, EduKidSpacing.spacingXl)
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(width: side, height: side)
-        .frame(maxWidth: .infinity)
     }
 }

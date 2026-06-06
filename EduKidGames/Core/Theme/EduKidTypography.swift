@@ -1,7 +1,10 @@
 import SwiftUI
 
 enum EduKidTypography {
-    static let headlineLarge = Font.system(size: 26, weight: .bold, design: .rounded)
-    static let bodyMedium = Font.system(size: 16, weight: .regular, design: .rounded)
-    static let labelLarge = Font.system(size: 17, weight: .semibold, design: .rounded)
+    static let displayLarge = Font.custom("Fredoka", size: 28).weight(.bold)
+    static let headlineLarge = Font.custom("Fredoka", size: 26).weight(.bold)
+    static let bodyMedium = Font.custom("Nunito", size: 16).weight(.semibold)
+    static let labelLarge = Font.custom("Fredoka", size: 17).weight(.bold)
+    static let splashTitle = Font.custom("Fredoka", size: 34).weight(.bold)
+    static let splashSubtitle = Font.custom("Fredoka", size: 22).weight(.semibold)
 }

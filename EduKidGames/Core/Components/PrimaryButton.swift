@@ -15,8 +15,15 @@ struct EduKidPrimaryButton: View {
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(EduKidColors.orange)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .background(
+                LinearGradient(
+                    colors: [EduKidColors.orange, Color(red: 0.88, green: 0.49, blue: 0.0)],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .clipShape(Capsule())
+            .shadow(color: EduKidColors.orange.opacity(0.35), radius: 10, x: 0, y: 6)
         }
         .buttonStyle(.plain)
     }

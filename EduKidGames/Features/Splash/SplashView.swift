@@ -3,15 +3,20 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            EduKidColors.cream.ignoresSafeArea()
+            LinearGradient(
+                colors: [EduKidColors.gradientTop, EduKidColors.cream, EduKidColors.gradientBottom],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             VStack(spacing: EduKidSpacing.spacingMd) {
-                EduKidAstronautLogo(size: 180)
-                VStack(spacing: 6) {
+                EduKidAstronautLogo(size: 160)
+                VStack(spacing: 4) {
                     Text("EduKid")
-                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .font(EduKidTypography.splashTitle)
                         .foregroundStyle(EduKidColors.navy)
                     Text("Games")
-                        .font(.system(size: 22, weight: .semibold, design: .rounded))
+                        .font(EduKidTypography.splashSubtitle)
                         .foregroundStyle(EduKidColors.orange)
                 }
                 ProgressView()

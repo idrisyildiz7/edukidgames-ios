@@ -24,6 +24,9 @@ targets:
     info:
       path: EduKidGames/Info.plist
       properties:
+        UIAppFonts:
+          - Fonts/Fredoka.ttf
+          - Fonts/Nunito.ttf
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true
           NSExceptionDomains:

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C182527912816FEF29E12B /* OnboardingView.swift */; };
 		11859336A82236EF694A243A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FA324EA86FB7CF3C25B70 /* SplashView.swift */; };
+		33658ED142143F8CAB3151A1 /* Nunito.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28C4C600290938DD6E2138A1 /* Nunito.ttf */; };
+		3DECB24C4227D6B561554A30 /* Fredoka.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4C079018D56F3A3F29772F /* Fredoka.ttf */; };
 		59989803EF5D84B56D708CE7 /* StudentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */; };
 		7516B75695CA4C185630CE2B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D888897BCB470567ECAF2D5 /* RootView.swift */; };
 		81ACFE3BF7965073AC1FC3E8 /* EduKidColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */; };
@@ -17,6 +19,7 @@
 		9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */; };
 		98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590483F152569B979A6AE62 /* EduKidSpacing.swift */; };
 		AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */; };
+		AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */; };
 		C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E504E47218EF89B25F2CED7 /* AppConstants.swift */; };
 		CABDC57C6B18E6B20188B181 /* WebCookieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */; };
 		E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAF696511CC651BC8E2C4F /* Localizable.strings */; };
@@ -28,8 +31,11 @@
 		13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidTypography.swift; sourceTree = "<group>"; };
 		172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCookieStore.swift; sourceTree = "<group>"; };
+		28C4C600290938DD6E2138A1 /* Nunito.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Nunito.ttf; sourceTree = "<group>"; };
+		2B4C079018D56F3A3F29772F /* Fredoka.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fredoka.ttf; sourceTree = "<group>"; };
 		2E504E47218EF89B25F2CED7 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		2FA64EE544B2836588CF8E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageIndicator.swift; sourceTree = "<group>"; };
 		4ECAF696511CC651BC8E2C4F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +60,7 @@
 		28A9858D4F39C8E7981A8A30 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */,
 				E7C182527912816FEF29E12B /* OnboardingView.swift */,
 			);
 			path = Onboarding;
@@ -107,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */,
+				FD9CB8ADB9FB728E79DA8F4D /* Fonts */,
 				5CF42819AD0F1D90B2859721 /* Localization */,
 			);
 			path = Resources;
@@ -167,6 +175,15 @@
 				082FA324EA86FB7CF3C25B70 /* SplashView.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		FD9CB8ADB9FB728E79DA8F4D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2B4C079018D56F3A3F29772F /* Fredoka.ttf */,
+				28C4C600290938DD6E2138A1 /* Nunito.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,7 +247,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */,
+				3DECB24C4227D6B561554A30 /* Fredoka.ttf in Resources */,
 				E0D466B8F2CFA8E8357BE0FA /* Localizable.strings in Resources */,
+				33658ED142143F8CAB3151A1 /* Nunito.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +266,7 @@
 				FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */,
 				98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */,
 				92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */,
+				AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */,
 				0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */,
 				AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */,
 				7516B75695CA4C185630CE2B /* RootView.swift in Sources */,
