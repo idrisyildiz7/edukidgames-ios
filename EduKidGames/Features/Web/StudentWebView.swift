@@ -1,54 +1,18 @@
 import SwiftUI
 import WebKit
 
+/// Tam ekran WebView — native chrome yok; web paneli doğrudan uygulama gibi görünür.
 struct StudentWebViewContainer: View {
     private let startURL = URL(string: AppConstants.loginURL)!
-    @State private var logoutRequestID = 0
-    @State private var currentURL: URL?
-
-    private var isLoginPage: Bool {
-        guard let currentURL else { return true }
-        return currentURL.path.hasPrefix("/Account/Login")
-    }
 
     var body: some View {
-        ZStack {
-            EduKidScreenBackground()
-            VStack(spacing: 0) {
-                if !isLoginPage {
-                    webTopBar
-                }
-                StudentWebView(
-                    url: startURL,
-                    logoutRequestID: logoutRequestID,
-                    onURLChange: { url in currentURL = url }
-                )
-            }
-        }
-    }
-
-    private var webTopBar: some View {
-        HStack {
-            EduKidLogoHorizontal(height: 32)
-            Spacer()
-            Button {
-                logoutRequestID += 1
-            } label: {
-                Text("web.logout")
-                    .font(EduKidTypography.labelLarge)
-                    .foregroundStyle(EduKidColors.orange)
-            }
-        }
-        .padding(.horizontal, EduKidSpacing.screenPadding)
-        .padding(.vertical, 10)
-        .background(EduKidColors.paper)
+        StudentWebView(url: startURL)
+            .ignoresSafeArea()
     }
 }
 
 struct StudentWebView: UIViewRepresentable {
     let url: URL
-    let logoutRequestID: Int
-    var onURLChange: ((URL?) -> Void)? = nil
 
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
@@ -58,9 +22,14 @@ struct StudentWebView: UIViewRepresentable {
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.customUserAgent = AppConstants.webViewUserAgent
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor(EduKidColors.cream)
+        webView.scrollView.backgroundColor = UIColor(EduKidColors.cream)
         webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.scrollView.bounces = false
+        webView.scrollView.bounces = true
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.showsHorizontalScrollIndicator = false
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         context.coordinator.webView = webView
@@ -70,19 +39,11 @@ struct StudentWebView: UIViewRepresentable {
         return webView
     }
 
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        context.coordinator.onURLChange = onURLChange
-        if context.coordinator.lastHandledLogoutRequestID != logoutRequestID {
-            context.coordinator.lastHandledLogoutRequestID = logoutRequestID
-            context.coordinator.performLogout(in: webView, startURL: url)
-        }
-    }
+    func updateUIView(_ webView: WKWebView, context: Context) {}
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
-        var onURLChange: ((URL?) -> Void)?
-        var lastHandledLogoutRequestID = 0
         weak var webView: WKWebView?
         private var didStartInitialLoad = false
         private var lifecycleObserved = false
@@ -155,30 +116,6 @@ struct StudentWebView: UIViewRepresentable {
             webView.evaluateJavaScript(script, completionHandler: nil)
         }
 
-        private func clearWebViewData(of webView: WKWebView, completion: @escaping () -> Void) {
-            let dataStore = webView.configuration.websiteDataStore
-            dataStore.httpCookieStore.getAllCookies { cookies in
-                let group = DispatchGroup()
-                for cookie in cookies {
-                    group.enter()
-                    dataStore.httpCookieStore.delete(cookie) { group.leave() }
-                }
-                group.notify(queue: .main) {
-                    let types = WKWebsiteDataStore.allWebsiteDataTypes()
-                    dataStore.fetchDataRecords(ofTypes: types) { records in
-                        dataStore.removeData(ofTypes: types, for: records) { completion() }
-                    }
-                }
-            }
-        }
-
-        func performLogout(in webView: WKWebView, startURL: URL) {
-            WebCookieStore.clear()
-            clearWebViewData(of: webView) {
-                webView.load(URLRequest(url: startURL, cachePolicy: .reloadIgnoringLocalCacheData))
-            }
-        }
-
         func webView(_ webView: WKWebView,
                      decidePolicyFor navigationAction: WKNavigationAction,
                      decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -188,7 +125,6 @@ struct StudentWebView: UIViewRepresentable {
             }
             if let url = navigationAction.request.url {
                 applyZoomPolicy(for: url, in: webView)
-                onURLChange?(url)
             }
             decisionHandler(.allow)
         }
@@ -197,7 +133,6 @@ struct StudentWebView: UIViewRepresentable {
             if let currentURL = webView.url {
                 applyZoomPolicy(for: currentURL, in: webView)
                 if isLoginPage(currentURL) { enforceLoginViewport(in: webView) }
-                onURLChange?(currentURL)
             }
             WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore)
         }
