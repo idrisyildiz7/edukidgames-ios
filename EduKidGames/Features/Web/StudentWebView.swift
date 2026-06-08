@@ -3,7 +3,13 @@ import WebKit
 
 /// Tam ekran WebView — native chrome yok; web paneli doğrudan uygulama gibi görünür.
 struct StudentWebViewContainer: View {
-    private let startURL = URL(string: AppConstants.loginURL)!
+    private var startURL: URL {
+        if WebCookieStore.hasStoredSession,
+           let home = URL(string: AppConstants.studentHomeURL) {
+            return home
+        }
+        return URL(string: AppConstants.loginURL)!
+    }
     @State private var isLoading = true
 
     var body: some View {
@@ -13,6 +19,8 @@ struct StudentWebViewContainer: View {
 
             if isLoading {
                 WebViewLoadingOverlay()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .ignoresSafeArea()
                     .transition(.opacity)
                     .zIndex(1)
             }
@@ -40,7 +48,10 @@ private struct WebViewLoadingOverlay: View {
 
                 WebViewLoadingDots()
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea()
         .onAppear { pulse = true }
     }
 }
@@ -110,6 +121,7 @@ struct StudentWebView: UIViewRepresentable {
         private var didStartInitialLoad = false
         private var lifecycleObserved = false
         private var loadingStartedAt = Date()
+        private var pendingLogout = false
 
         init(parent: StudentWebView) {
             self.parent = parent
@@ -123,6 +135,15 @@ struct StudentWebView: UIViewRepresentable {
 
         private func isLoginPage(_ url: URL) -> Bool {
             url.path.hasPrefix("/Account/Login")
+        }
+
+        private func isLogoutPage(_ url: URL) -> Bool {
+            url.path.hasPrefix(AppConstants.logoutPathPrefix)
+        }
+
+        private func handleLogout(in webView: WKWebView) {
+            pendingLogout = false
+            WebCookieStore.clearAll(in: webView.configuration.websiteDataStore.httpCookieStore)
         }
 
         func startInitialLoad(_ url: URL, in webView: WKWebView) {
@@ -167,6 +188,18 @@ struct StudentWebView: UIViewRepresentable {
             )
             NotificationCenter.default.addObserver(
                 self,
+                selector: #selector(persistCookies),
+                name: UIApplication.didEnterBackgroundNotification,
+                object: nil
+            )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(persistCookies),
+                name: UIApplication.willTerminateNotification,
+                object: nil
+            )
+            NotificationCenter.default.addObserver(
+                self,
                 selector: #selector(refreshLoginLayout),
                 name: UIResponder.keyboardWillChangeFrameNotification,
                 object: nil
@@ -200,7 +233,19 @@ struct StudentWebView: UIViewRepresentable {
 
         @objc private func persistCookies() {
             guard let webView else { return }
-            WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore)
+            var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+            backgroundTask = UIApplication.shared.beginBackgroundTask {
+                if backgroundTask != .invalid {
+                    UIApplication.shared.endBackgroundTask(backgroundTask)
+                    backgroundTask = .invalid
+                }
+            }
+            WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore) {
+                if backgroundTask != .invalid {
+                    UIApplication.shared.endBackgroundTask(backgroundTask)
+                    backgroundTask = .invalid
+                }
+            }
         }
 
         @discardableResult
@@ -213,14 +258,14 @@ struct StudentWebView: UIViewRepresentable {
 
         func applyZoomPolicy(for url: URL, in webView: WKWebView) {
             let isLogin = isLoginPage(url)
-            webView.scrollView.pinchGestureRecognizer?.isEnabled = !isLogin
-            webView.scrollView.minimumZoomScale = isLogin ? 1 : 0.5
-            webView.scrollView.maximumZoomScale = isLogin ? 1 : 3
+            webView.scrollView.pinchGestureRecognizer?.isEnabled = false
+            webView.scrollView.minimumZoomScale = 1
+            webView.scrollView.maximumZoomScale = 1
             webView.scrollView.isScrollEnabled = !isLogin
             webView.scrollView.bounces = !isLogin
             webView.scrollView.alwaysBounceVertical = !isLogin
+            webView.scrollView.setZoomScale(1, animated: false)
             if isLogin {
-                webView.scrollView.setZoomScale(1, animated: false)
                 webView.scrollView.contentOffset = .zero
             }
         }
@@ -272,6 +317,9 @@ struct StudentWebView: UIViewRepresentable {
                 return
             }
             if let url = navigationAction.request.url {
+                if isLogoutPage(url) {
+                    pendingLogout = true
+                }
                 applyZoomPolicy(for: url, in: webView)
             }
             decisionHandler(.allow)
@@ -287,9 +335,16 @@ struct StudentWebView: UIViewRepresentable {
                 if isLoginPage(currentURL) {
                     enforceLoginViewport(in: webView)
                     injectAuthSafeArea(in: webView)
+                    if pendingLogout {
+                        handleLogout(in: webView)
+                    }
+                } else if isLogoutPage(currentURL) {
+                    handleLogout(in: webView)
                 }
             }
-            WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore)
+            WebCookieStore.persist(from: webView.configuration.websiteDataStore.httpCookieStore) {
+                // completion: persist is async; overlay already handled in endLoading()
+            }
             endLoading()
         }
 
