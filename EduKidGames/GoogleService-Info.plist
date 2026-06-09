@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyC_VhFHDk_Qh4Yj0H_qJHEFvve27_be07U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>709484757422</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.edukidgames.app</string>
+	<key>PROJECT_ID</key>
+	<string>base-loca</string>
+	<key>STORAGE_BUCKET</key>
+	<string>base-loca.firebasestorage.app</string>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:709484757422:ios:edukidgames_placeholder</string>
+	<key>DATABASE_URL</key>
+	<string>https://base-loca.firebaseio.com</string>
+</dict>
+</plist>

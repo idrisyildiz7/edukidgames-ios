@@ -4,6 +4,10 @@ options:
   developmentLanguage: tr
   deploymentTarget:
     iOS: "16.0"
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk.git
+    from: 11.0.0
 targets:
   EduKidGames:
     type: application
@@ -12,6 +16,14 @@ targets:
       - EduKidGames
     resources:
       - EduKidGames/Resources
+      - EduKidGames/GoogleService-Info.plist
+    entitlements:
+      path: EduKidGames/EduKidGames.entitlements
+    dependencies:
+      - package: Firebase
+        product: FirebaseCore
+      - package: Firebase
+        product: FirebaseMessaging
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.edukidgames.app
       MARKETING_VERSION: "1.0.0"

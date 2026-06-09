@@ -3,12 +3,14 @@ import WebKit
 
 /// Tam ekran WebView — native chrome yok; web paneli doğrudan uygulama gibi görünür.
 struct StudentWebViewContainer: View {
+    var deepLinkRoute: String? = nil
+
     private var startURL: URL {
-        if WebCookieStore.hasStoredSession,
-           let home = URL(string: AppConstants.studentHomeURL) {
-            return home
+        if let route = deepLinkRoute, route.hasPrefix("/"),
+           let url = URL(string: AppConstants.apiBaseURL + route) {
+            return url
         }
-        return URL(string: AppConstants.loginURL)!
+        return URL(string: AppConstants.studentHomeURL)!
     }
     @State private var isLoading = true
 
