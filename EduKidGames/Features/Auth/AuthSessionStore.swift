@@ -25,6 +25,6 @@ enum AuthSessionStore {
     static func clear() {
         accessToken = nil
         userId = nil
-        WebCookieStore.clearAll()
+        WebCookieStore.clear()
     }
 }

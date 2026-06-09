@@ -2,7 +2,12 @@ import Foundation
 
 enum AppConstants {
     #if DEBUG
+    #if targetEnvironment(simulator)
     static let apiBaseURL = "http://127.0.0.1:5029"
+    #else
+    // Fiziksel cihaz: canlı sunucu (yerel IP/Mac sunucusu güvenilir değil)
+    static let apiBaseURL = "https://edukidgames.com"
+    #endif
     #else
     static let apiBaseURL = "https://edukidgames.com"
     #endif
@@ -16,4 +21,8 @@ enum AppConstants {
     static let authTokenKey = "edukid.auth.token"
     static let authUserIdKey = "edukid.auth.userId"
     static let splashDuration: TimeInterval = 1.5
+
+    /// Misafir endpoint yoksa fallback (sunucu DemoUsers ile aynı)
+    static let demoStudentEmail = "ogrenci@edukidgames.com"
+    static let demoStudentPassword = "Password123!"
 }

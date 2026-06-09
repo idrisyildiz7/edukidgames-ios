@@ -13,8 +13,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         AppDelegate.shared = self
-        FirebaseApp.configure()
-        Messaging.messaging().delegate = self
+        configureFirebaseIfNeeded()
 
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
@@ -22,7 +21,20 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         return true
     }
 
+    private func configureFirebaseIfNeeded() {
+        guard let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+              let plist = NSDictionary(contentsOfFile: path),
+              let appId = plist["GOOGLE_APP_ID"] as? String,
+              !appId.isEmpty,
+              !appId.contains("placeholder") else {
+            return
+        }
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+    }
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        guard FirebaseApp.app() != nil else { return }
         Messaging.messaging().apnsToken = deviceToken
     }
 
@@ -36,7 +48,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
     }
 
     static func sendDeviceTokenToServerIfNeeded() {
-        guard AuthSessionStore.isLoggedIn else { return }
+        guard FirebaseApp.app() != nil, AuthSessionStore.isLoggedIn else { return }
         Messaging.messaging().token { fcmToken, _ in
             guard let fcmToken,
                   let token = AuthSessionStore.accessToken,

@@ -8,18 +8,21 @@ struct RootView: View {
 
     var body: some View {
         Group {
-            if showSplash || (hasSeenOnboarding && isLoggedIn == nil) {
+            if showSplash {
                 SplashView()
             } else if !hasSeenOnboarding {
                 OnboardingView()
-            } else if isLoggedIn == false {
-                LoginView(onLoggedIn: { isLoggedIn = true })
-            } else {
+            } else if isLoggedIn == true {
                 StudentWebViewContainer(deepLinkRoute: deepLinkRoute)
+            } else {
+                LoginView(onLoggedIn: { isLoggedIn = true })
             }
         }
-        .onAppear { startSplashTimer() }
-        .onChange(of: hasSeenOnboarding) { _, seen in
+        .onAppear {
+            startSplashTimer()
+            if hasSeenOnboarding { restoreSession() }
+        }
+        .onChange(of: hasSeenOnboarding) { seen in
             if seen { restoreSession() }
         }
         .onReceive(NotificationCenter.default.publisher(for: .edukidPushDeepLink)) { note in
@@ -37,20 +40,35 @@ struct RootView: View {
     }
 
     private func restoreSession() {
-        guard isLoggedIn == nil else { return }
-        guard AuthSessionStore.isLoggedIn, let token = AuthSessionStore.accessToken else {
+        guard isLoggedIn != true else { return }
+        guard AuthSessionStore.isLoggedIn, AuthSessionStore.accessToken != nil else {
             isLoggedIn = false
             return
         }
         Task {
             do {
-                try await AuthService.establishWebSession(accessToken: token)
-                AppDelegate.sendDeviceTokenToServerIfNeeded()
+                try await withTimeout(seconds: 10) {
+                    guard let token = AuthSessionStore.accessToken else { return }
+                    try await AuthService.establishWebSession(accessToken: token)
+                    AppDelegate.sendDeviceTokenToServerIfNeeded()
+                }
                 await MainActor.run { isLoggedIn = true }
             } catch {
                 AuthSessionStore.clear()
                 await MainActor.run { isLoggedIn = false }
             }
         }
+    }
+}
+
+private func withTimeout(seconds: TimeInterval, operation: @escaping () async throws -> Void) async throws {
+    try await withThrowingTaskGroup(of: Void.self) { group in
+        group.addTask { try await operation() }
+        group.addTask {
+            try await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+            throw URLError(.timedOut)
+        }
+        try await group.next()
+        group.cancelAll()
     }
 }

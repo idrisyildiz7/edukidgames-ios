@@ -10,4 +10,6 @@ enum EduKidColors {
     static let outline = Color(red: 1.0, green: 0.894, blue: 0.780)
     static let gradientTop = Color(red: 1.0, green: 0.984, blue: 0.961)
     static let gradientBottom = Color(red: 1.0, green: 0.957, blue: 0.902)
+    static let primaryDark = Color(red: 0.878, green: 0.486, blue: 0.0)
+    static let guestText = Color(red: 0.059, green: 0.463, blue: 0.431)
 }

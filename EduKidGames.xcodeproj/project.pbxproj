@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0067439849A5A63F6CF91194 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 991017F2A57CD6D80F7295C9 /* FirebaseMessaging */; };
+		011D4674CD1647F7F697AFA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC34427756D85CEC7BAB4B33 /* GoogleService-Info.plist */; };
 		0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C182527912816FEF29E12B /* OnboardingView.swift */; };
 		11859336A82236EF694A243A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FA324EA86FB7CF3C25B70 /* SplashView.swift */; };
+		228C2C84B17714CF50F6607C /* AuthSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58A647BECC4BC99B58D5943 /* AuthSessionStore.swift */; };
+		2D59D1257BABBF133B5FF31F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7E55552F13E9F96ECAC43769 /* FirebaseCore */; };
+		30059E6A5FFECF60FFF9209E /* AuthWelcomeTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573AB07F081E05F0D2E768A4 /* AuthWelcomeTitle.swift */; };
 		33658ED142143F8CAB3151A1 /* Nunito.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28C4C600290938DD6E2138A1 /* Nunito.ttf */; };
 		3692F3626AC388A1EB383463 /* OnboardingPagingScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2B301BC44A7B1C96693B4 /* OnboardingPagingScroll.swift */; };
 		3DECB24C4227D6B561554A30 /* Fredoka.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4C079018D56F3A3F29772F /* Fredoka.ttf */; };
 		59989803EF5D84B56D708CE7 /* StudentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */; };
+		61F9BF869E4EEAC44346186E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603962550D9416A8C03F1F05 /* AuthService.swift */; };
 		7516B75695CA4C185630CE2B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D888897BCB470567ECAF2D5 /* RootView.swift */; };
 		81ACFE3BF7965073AC1FC3E8 /* EduKidColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */; };
 		8F7C04D5A34E242AAC9CBEB5 /* EduKidGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */; };
@@ -22,13 +28,17 @@
 		98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590483F152569B979A6AE62 /* EduKidSpacing.swift */; };
 		AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */; };
 		AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */; };
+		B765D844F973C8860F20FB56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DB8E382FD81C631F81FE4 /* AppDelegate.swift */; };
+		BFF08F83FF8608DEC4FA5F8F /* AuthLoginBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF68AF03402384D3FFC1D0E /* AuthLoginBackground.swift */; };
 		C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E504E47218EF89B25F2CED7 /* AppConstants.swift */; };
 		CABDC57C6B18E6B20188B181 /* WebCookieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */; };
+		D303DF6C12CBC16DB7DE5242 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77300308AA923C526B03F5 /* LoginView.swift */; };
 		FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46108D994BBB947E350625 /* EduKidLogoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		082FA324EA86FB7CF3C25B70 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		0B77300308AA923C526B03F5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidTypography.swift; sourceTree = "<group>"; };
 		172E47B0D2371C23B25CA9E2 /* WebCookieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCookieStore.swift; sourceTree = "<group>"; };
@@ -38,6 +48,9 @@
 		2E504E47218EF89B25F2CED7 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		2FA64EE544B2836588CF8E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageIndicator.swift; sourceTree = "<group>"; };
+		573AB07F081E05F0D2E768A4 /* AuthWelcomeTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWelcomeTitle.swift; sourceTree = "<group>"; };
+		603962550D9416A8C03F1F05 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		639C5AA69552117FD61064D1 /* EduKidGames.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EduKidGames.entitlements; sourceTree = "<group>"; };
 		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FFBC0DA5199E8FF6C6BCDBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -46,10 +59,26 @@
 		9D888897BCB470567ECAF2D5 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		AC37553EC4E2C21F302B50C0 /* StudentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentWebView.swift; sourceTree = "<group>"; };
 		AF46108D994BBB947E350625 /* EduKidLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidLogoView.swift; sourceTree = "<group>"; };
+		B58A647BECC4BC99B58D5943 /* AuthSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSessionStore.swift; sourceTree = "<group>"; };
+		BC34427756D85CEC7BAB4B33 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C590483F152569B979A6AE62 /* EduKidSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidSpacing.swift; sourceTree = "<group>"; };
 		D0D1077BFDBD103EFF7DF574 /* EduKidColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidColors.swift; sourceTree = "<group>"; };
 		E7C182527912816FEF29E12B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		FE5DB8E382FD81C631F81FE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FEF68AF03402384D3FFC1D0E /* AuthLoginBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLoginBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB22E01EA126BFFD949D7C83 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D59D1257BABBF133B5FF31F /* FirebaseCore in Frameworks */,
+				0067439849A5A63F6CF91194 /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		21CE071E32CAABE8143773BB = {
@@ -73,6 +102,7 @@
 		3E6B0080D3244F45C24C1928 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				75AEBC023A61C7A7D40AF6C3 /* Auth */,
 				28A9858D4F39C8E7981A8A30 /* Onboarding */,
 				D9B5B290F68CF9D9F43A1692 /* Splash */,
 				8236C62903769C10B8460F55 /* Web */,
@@ -134,6 +164,18 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		75AEBC023A61C7A7D40AF6C3 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FEF68AF03402384D3FFC1D0E /* AuthLoginBackground.swift */,
+				603962550D9416A8C03F1F05 /* AuthService.swift */,
+				B58A647BECC4BC99B58D5943 /* AuthSessionStore.swift */,
+				573AB07F081E05F0D2E768A4 /* AuthWelcomeTitle.swift */,
+				0B77300308AA923C526B03F5 /* LoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		8236C62903769C10B8460F55 /* Web */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +193,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		9C7BA4D612ADCCF62C52EAE7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FE5DB8E382FD81C631F81FE4 /* AppDelegate.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		A25BABC1F51E8A4359BF9957 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,11 +213,14 @@
 		C6587BD237C96848D73CFE56 /* EduKidGames */ = {
 			isa = PBXGroup;
 			children = (
+				639C5AA69552117FD61064D1 /* EduKidGames.entitlements */,
 				88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */,
+				BC34427756D85CEC7BAB4B33 /* GoogleService-Info.plist */,
 				2FA64EE544B2836588CF8E4E /* Info.plist */,
 				4AC41442BC831284E4F55D67 /* App */,
 				6F441B6C44C59E2FEB377645 /* Core */,
 				3E6B0080D3244F45C24C1928 /* Features */,
+				9C7BA4D612ADCCF62C52EAE7 /* Managers */,
 				620321A2CA9AAF728CC497A3 /* Resources */,
 			);
 			path = EduKidGames;
@@ -199,6 +252,7 @@
 			buildPhases = (
 				8C22D3C9AAB4549615E86DB0 /* Sources */,
 				55663EB411592D67479E748B /* Resources */,
+				DB22E01EA126BFFD949D7C83 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -206,6 +260,8 @@
 			);
 			name = EduKidGames;
 			packageProductDependencies = (
+				7E55552F13E9F96ECAC43769 /* FirebaseCore */,
+				991017F2A57CD6D80F7295C9 /* FirebaseMessaging */,
 			);
 			productName = EduKidGames;
 			productReference = 7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */;
@@ -221,6 +277,7 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					20252FD233D89B78A3017CCC = {
+						DevelopmentTeam = ZDR75MUR47;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -235,6 +292,9 @@
 			);
 			mainGroup = 21CE071E32CAABE8143773BB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				842C08CF78866FAB2CDB4902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5BB1D0D26E224639B504A197 /* Products */;
 			projectDirPath = "";
@@ -252,6 +312,7 @@
 			files = (
 				9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */,
 				3DECB24C4227D6B561554A30 /* Fredoka.ttf in Resources */,
+				011D4674CD1647F7F697AFA3 /* GoogleService-Info.plist in Resources */,
 				8FEA4F41C26EB5A8C7AC3C03 /* Localizable.strings in Resources */,
 				33658ED142143F8CAB3151A1 /* Nunito.ttf in Resources */,
 			);
@@ -265,11 +326,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C318E9B337F3ADE5406EADC8 /* AppConstants.swift in Sources */,
+				B765D844F973C8860F20FB56 /* AppDelegate.swift in Sources */,
+				BFF08F83FF8608DEC4FA5F8F /* AuthLoginBackground.swift in Sources */,
+				61F9BF869E4EEAC44346186E /* AuthService.swift in Sources */,
+				228C2C84B17714CF50F6607C /* AuthSessionStore.swift in Sources */,
+				30059E6A5FFECF60FFF9209E /* AuthWelcomeTitle.swift in Sources */,
 				81ACFE3BF7965073AC1FC3E8 /* EduKidColors.swift in Sources */,
 				8F7C04D5A34E242AAC9CBEB5 /* EduKidGamesApp.swift in Sources */,
 				FA9B968F9D9E9F26329B97C3 /* EduKidLogoView.swift in Sources */,
 				98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */,
 				92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */,
+				D303DF6C12CBC16DB7DE5242 /* LoginView.swift in Sources */,
 				AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */,
 				3692F3626AC388A1EB383463 /* OnboardingPagingScroll.swift in Sources */,
 				0EB926FF5AC40C22A9B4A6C1 /* OnboardingView.swift in Sources */,
@@ -419,6 +486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EduKidGames/EduKidGames.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -444,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EduKidGames/EduKidGames.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -487,6 +556,30 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		842C08CF78866FAB2CDB4902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7E55552F13E9F96ECAC43769 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 842C08CF78866FAB2CDB4902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		991017F2A57CD6D80F7295C9 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 842C08CF78866FAB2CDB4902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A67940060C84BC7F8332AF79 /* Project object */;
 }
