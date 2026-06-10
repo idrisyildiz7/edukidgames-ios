@@ -1,5 +1,5 @@
 {
-  "originHash" : "05316a5b6bfb95a20d12ff4e2dff2396cd4498a3a8fa44c6f236a4537f2030c4",
+  "originHash" : "3c2afeef40e9a618aafd6b2f4f7d2499da320b6e0ed1ea5741f64575c147a89c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "bbe8b69694d7873315fd3a4ad41efe043e1c07c5",
         "version" : "1.2024072200.0"
+      }
+    },
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "7595cbcf59809f9977c5f6378500de2ad73b7ddb",
+        "version" : "5.12.0"
       }
     },
     {
@@ -134,6 +143,15 @@
       "state" : {
         "revision" : "f6506eaa86ed2e01cb0ae14a75035b7fdbf0918f",
         "version" : "1.38.0"
+      }
+    },
+    {
+      "identity" : "swiftyjson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
+      "state" : {
+        "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
+        "version" : "5.0.2"
       }
     }
   ],

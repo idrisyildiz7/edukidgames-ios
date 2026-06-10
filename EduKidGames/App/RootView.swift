@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject private var userManager: UserManager
     @AppStorage(AppConstants.onboardingSeenKey) private var hasSeenOnboarding = false
     @State private var showSplash = true
     @State private var isAutoLogging = false
-    @State private var isLoggedIn: Bool? = nil
     @State private var deepLinkRoute: String?
 
     var body: some View {
@@ -13,18 +13,22 @@ struct RootView: View {
                 SplashView()
             } else if !hasSeenOnboarding {
                 OnboardingView()
-            } else if isLoggedIn == true {
+            } else if userManager.isLoggedIn {
                 StudentWebViewContainer(deepLinkRoute: deepLinkRoute)
             } else {
-                LoginView(onLoggedIn: { isLoggedIn = true })
+                LoginView()
             }
         }
         .onAppear {
             startSplashTimer()
-            if hasSeenOnboarding { attemptAutoLogin() }
+            if hasSeenOnboarding {
+                attemptAutoLogin()
+            }
         }
         .onChange(of: hasSeenOnboarding) { seen in
-            if seen { attemptAutoLogin() }
+            if seen {
+                attemptAutoLogin()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: .edukidPushDeepLink)) { note in
             deepLinkRoute = note.object as? String
@@ -36,35 +40,27 @@ struct RootView: View {
             withAnimation(.easeOut(duration: 0.3)) {
                 showSplash = false
             }
-            if hasSeenOnboarding { attemptAutoLogin() }
         }
     }
 
     private func attemptAutoLogin() {
-        guard isLoggedIn != true else { return }
-        guard AuthSessionStore.hasSavedCredentials else {
-            isLoggedIn = false
-            return
-        }
+        guard !isAutoLogging else { return }
+        guard !userManager.isLoggedIn else { return }
+        guard userManager.hasSavedCredentials else { return }
 
         isAutoLogging = true
-        AuthSessionStore.clearActiveSession()
+        userManager.clearActiveSession()
+
         Task {
             do {
                 try await withTimeout(seconds: 15) {
-                    let auth = try await AuthSessionStore.loginWithSavedCredentials()
-                    try await AuthSessionStore.completeAuthenticatedSession(auth: auth)
+                    let auth = try await userManager.loginWithSavedCredentials()
+                    try await userManager.completeAuthenticatedSession(auth: auth)
                 }
-                await MainActor.run {
-                    isAutoLogging = false
-                    isLoggedIn = true
-                }
+                isAutoLogging = false
             } catch {
-                AuthSessionStore.clear()
-                await MainActor.run {
-                    isAutoLogging = false
-                    isLoggedIn = false
-                }
+                userManager.clear()
+                isAutoLogging = false
             }
         }
     }

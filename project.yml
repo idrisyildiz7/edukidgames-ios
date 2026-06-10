@@ -11,6 +11,12 @@ packages:
   DebugSwift:
     url: https://github.com/DebugSwift/DebugSwift.git
     from: 1.12.0
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire.git
+    from: 5.9.0
+  SwiftyJSON:
+    url: https://github.com/SwiftyJSON/SwiftyJSON.git
+    from: 5.0.2
 targets:
   EduKidGames:
     type: application
@@ -31,6 +37,10 @@ targets:
         product: FirebaseMessaging
       - package: DebugSwift
         product: DebugSwift
+      - package: Alamofire
+        product: Alamofire
+      - package: SwiftyJSON
+        product: SwiftyJSON
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.edukidgames.app
       MARKETING_VERSION: "1.0.0"

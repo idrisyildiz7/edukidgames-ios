@@ -10,6 +10,7 @@ import DebugSwift
 final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     static weak var shared: AppDelegate?
     static var pendingDeepLinkRoute: String?
+    private static var lastRegisteredFCMToken: String?
 
 #if DEBUG
     private let debugSwift = DebugSwift()
@@ -73,48 +74,65 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         #if DEBUG
         print("[Push] FCM token alındı.")
         #endif
-        guard AuthSessionStore.allowsDeviceTokenRegistration,
-              AuthSessionStore.isLoggedIn,
-              let token = AuthSessionStore.accessToken,
-              let userId = AuthSessionStore.userId else { return }
-        Task {
+        Task { @MainActor in
+            guard UserManager.shared.allowsDeviceTokenRegistration,
+                  UserManager.shared.isLoggedIn,
+                  let token = UserManager.shared.accessToken,
+                  let userId = UserManager.shared.userId else { return }
             await Self.registerDeviceToken(accessToken: token, userId: userId, fcmToken: fcmToken)
         }
     }
 
     static func sendDeviceTokenToServerIfNeeded() {
-        guard FirebaseApp.app() != nil,
-              AuthSessionStore.allowsDeviceTokenRegistration,
-              AuthSessionStore.isLoggedIn else { return }
-        Messaging.messaging().token { fcmToken, error in
-            if let error {
-                #if DEBUG
-                print("[Push] FCM token alınamadı: \(error.localizedDescription)")
-                #endif
-                return
-            }
-            guard let fcmToken,
-                  let token = AuthSessionStore.accessToken,
-                  let userId = AuthSessionStore.userId else { return }
-            Task {
-                await Self.registerDeviceToken(accessToken: token, userId: userId, fcmToken: fcmToken)
+        guard FirebaseApp.app() != nil else { return }
+        Task { @MainActor in
+            guard UserManager.shared.allowsDeviceTokenRegistration,
+                  UserManager.shared.isLoggedIn,
+                  let token = UserManager.shared.accessToken,
+                  let userId = UserManager.shared.userId else { return }
+
+            Messaging.messaging().token { fcmToken, error in
+                if let error {
+                    #if DEBUG
+                    print("[Push] FCM token alınamadı: \(error.localizedDescription)")
+                    #endif
+                    return
+                }
+                guard let fcmToken else { return }
+                Task { @MainActor in
+                    await Self.registerDeviceToken(accessToken: token, userId: userId, fcmToken: fcmToken)
+                }
             }
         }
     }
 
+    static func resetRegisteredFCMToken() {
+        lastRegisteredFCMToken = nil
+    }
+
     private static func registerDeviceToken(accessToken: String, userId: String, fcmToken: String) async {
-        let success = await AuthService.registerDeviceToken(
+        guard lastRegisteredFCMToken != fcmToken else {
+            #if DEBUG
+            print("[Push] Token zaten kayıtlı, tekrar gönderilmedi.")
+            #endif
+            return
+        }
+
+        let success = await AuthService.shared.registerDeviceToken(
             accessToken: accessToken,
             userId: userId,
             fcmToken: fcmToken
         )
-        #if DEBUG
         if success {
+            lastRegisteredFCMToken = fcmToken
+            #if DEBUG
             print("[Push] Token başarıyla server'a kaydedildi.")
+            #endif
         } else {
+            #if DEBUG
             print("[Push] Token gönderilirken hata oluştu.")
+            #endif
         }
-        #endif
     }
 
     // MARK: - UNUserNotificationCenterDelegate

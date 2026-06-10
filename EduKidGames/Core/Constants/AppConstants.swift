@@ -13,6 +13,10 @@ enum AppConstants {
     #endif
 
     static var studentHomeURL: String { apiBaseURL + "/Student/Index?shell=webview" }
+    static var guestStudentLoginURL: String { apiBaseURL + "/api/auth/guest-student-login" }
+    static var studentLoginURL: String { apiBaseURL + "/api/auth/student-login" }
+    static var establishWebSessionURL: String { apiBaseURL + "/api/auth/establish-web-session" }
+    static var deviceTokenURL: String { apiBaseURL + "/api/mobile/device-token" }
     static let logoutPathPrefix = "/Account/Logout"
 
     static let webViewUserAgent = "EduKidWebView/1.0 (iOS)"
