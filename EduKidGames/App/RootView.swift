@@ -3,12 +3,13 @@ import SwiftUI
 struct RootView: View {
     @AppStorage(AppConstants.onboardingSeenKey) private var hasSeenOnboarding = false
     @State private var showSplash = true
+    @State private var isAutoLogging = false
     @State private var isLoggedIn: Bool? = nil
     @State private var deepLinkRoute: String?
 
     var body: some View {
         Group {
-            if showSplash {
+            if showSplash || isAutoLogging {
                 SplashView()
             } else if !hasSeenOnboarding {
                 OnboardingView()
@@ -20,10 +21,10 @@ struct RootView: View {
         }
         .onAppear {
             startSplashTimer()
-            if hasSeenOnboarding { restoreSession() }
+            if hasSeenOnboarding { attemptAutoLogin() }
         }
         .onChange(of: hasSeenOnboarding) { seen in
-            if seen { restoreSession() }
+            if seen { attemptAutoLogin() }
         }
         .onReceive(NotificationCenter.default.publisher(for: .edukidPushDeepLink)) { note in
             deepLinkRoute = note.object as? String
@@ -34,28 +35,36 @@ struct RootView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + AppConstants.splashDuration) {
             withAnimation(.easeOut(duration: 0.3)) {
                 showSplash = false
-                if hasSeenOnboarding { restoreSession() }
             }
+            if hasSeenOnboarding { attemptAutoLogin() }
         }
     }
 
-    private func restoreSession() {
+    private func attemptAutoLogin() {
         guard isLoggedIn != true else { return }
-        guard AuthSessionStore.isLoggedIn, AuthSessionStore.accessToken != nil else {
+        guard AuthSessionStore.hasSavedCredentials else {
             isLoggedIn = false
             return
         }
+
+        isAutoLogging = true
+        AuthSessionStore.clearActiveSession()
         Task {
             do {
-                try await withTimeout(seconds: 10) {
-                    guard let token = AuthSessionStore.accessToken else { return }
-                    try await AuthService.establishWebSession(accessToken: token)
-                    AppDelegate.sendDeviceTokenToServerIfNeeded()
+                try await withTimeout(seconds: 15) {
+                    let auth = try await AuthSessionStore.loginWithSavedCredentials()
+                    try await AuthSessionStore.completeAuthenticatedSession(auth: auth)
                 }
-                await MainActor.run { isLoggedIn = true }
+                await MainActor.run {
+                    isAutoLogging = false
+                    isLoggedIn = true
+                }
             } catch {
                 AuthSessionStore.clear()
-                await MainActor.run { isLoggedIn = false }
+                await MainActor.run {
+                    isAutoLogging = false
+                    isLoggedIn = false
+                }
             }
         }
     }

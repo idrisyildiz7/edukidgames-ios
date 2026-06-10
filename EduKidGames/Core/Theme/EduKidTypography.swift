@@ -1,16 +1,13 @@
 import SwiftUI
 
 enum EduKidTypography {
-    private static let fredoka = "Fredoka-Light"
-    private static let nunito = "Nunito-ExtraLight"
+    static let displayLarge = Font.custom("Fredoka-Bold", size: 28)
+    static let headlineLarge = Font.custom("Fredoka-Bold", size: 26)
+    static let bodyMedium = Font.custom("Nunito-SemiBold", size: 16)
+    static let labelLarge = Font.custom("Fredoka-Bold", size: 17)
+    static let splashTitle = Font.custom("Fredoka-Bold", size: 34)
+    static let splashSubtitle = Font.custom("Fredoka-SemiBold", size: 22)
 
-    static let displayLarge = Font.custom(fredoka, size: 28).weight(.bold)
-    static let headlineLarge = Font.custom(fredoka, size: 26).weight(.bold)
-    static let bodyMedium = Font.custom(nunito, size: 16).weight(.semibold)
-    static let labelLarge = Font.custom(fredoka, size: 17).weight(.bold)
-    static let splashTitle = Font.custom(fredoka, size: 34).weight(.bold)
-    static let splashSubtitle = Font.custom(fredoka, size: 22).weight(.semibold)
-
-    static let onboardingTitle = Font.custom(fredoka, size: 24).weight(.bold)
-    static let onboardingBody = Font.custom(nunito, size: 15).weight(.semibold)
+    static let onboardingTitle = Font.custom("Fredoka-Bold", size: 24)
+    static let onboardingBody = Font.custom("Nunito-SemiBold", size: 15)
 }

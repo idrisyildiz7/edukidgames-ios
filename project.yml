@@ -8,6 +8,9 @@ packages:
   Firebase:
     url: https://github.com/firebase/firebase-ios-sdk.git
     from: 11.0.0
+  DebugSwift:
+    url: https://github.com/DebugSwift/DebugSwift.git
+    from: 1.12.0
 targets:
   EduKidGames:
     type: application
@@ -19,17 +22,22 @@ targets:
       - EduKidGames/GoogleService-Info.plist
     entitlements:
       path: EduKidGames/EduKidGames.entitlements
+      properties:
+        aps-environment: development
     dependencies:
       - package: Firebase
         product: FirebaseCore
       - package: Firebase
         product: FirebaseMessaging
+      - package: DebugSwift
+        product: DebugSwift
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.edukidgames.app
       MARKETING_VERSION: "1.0.0"
       CURRENT_PROJECT_VERSION: "1"
       SWIFT_VERSION: "5.0"
       CODE_SIGN_STYLE: Automatic
+      CODE_SIGN_ENTITLEMENTS: EduKidGames/EduKidGames.entitlements
       DEVELOPMENT_TEAM: ZDR75MUR47
       GENERATE_INFOPLIST_FILE: YES
       INFOPLIST_KEY_UILaunchScreen_Generation: YES
@@ -42,9 +50,11 @@ targets:
         CFBundleLocalizations:
           - tr
           - en
+        UIBackgroundModes:
+          - remote-notification
         UIAppFonts:
-          - Fonts/Fredoka.ttf
-          - Fonts/Nunito.ttf
+          - Fredoka.ttf
+          - Nunito.ttf
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationPortraitUpsideDown

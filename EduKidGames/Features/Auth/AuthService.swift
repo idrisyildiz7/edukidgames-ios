@@ -101,15 +101,25 @@ enum AuthService {
         throw AuthError.server("Web oturumu oluşturulamadı")
     }
 
-    static func registerDeviceToken(accessToken: String, userId: String, fcmToken: String) async {
+    @discardableResult
+    static func registerDeviceToken(accessToken: String, userId: String, fcmToken: String) async -> Bool {
         let url = URL(string: AppConstants.apiBaseURL + "/api/mobile/device-token")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         let body: [String: Any] = ["token": fcmToken, "platform": "ios", "userId": userId]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
-        _ = try? await URLSession.shared.data(for: request)
+        guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else { return false }
+        request.httpBody = bodyData
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+                return false
+            }
+            return true
+        } catch {
+            return false
+        }
     }
 
     private static func parseJSONObject(_ data: Data) throws -> [String: Any] {

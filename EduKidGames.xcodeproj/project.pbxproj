@@ -26,6 +26,7 @@
 		92A261BB44118F7E6C4214DB /* EduKidTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C84E1C9C0FB557707CA742 /* EduKidTypography.swift */; };
 		9473CD4A89D13C90B770F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */; };
 		98B3BB262D82CC1688FE7875 /* EduKidSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590483F152569B979A6AE62 /* EduKidSpacing.swift */; };
+		9A3AE187574207CFC00BA527 /* DebugSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F7011908FC0A24EB5B46D9E2 /* DebugSwift */; };
 		AA2D328E1D3CCBD384A87255 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6C49043EB99D5556F6C65 /* PrimaryButton.swift */; };
 		AF2C00A383844C698C5B5D07 /* OnboardingPageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558DBB7E03B809E662F1448 /* OnboardingPageIndicator.swift */; };
 		B765D844F973C8860F20FB56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DB8E382FD81C631F81FE4 /* AppDelegate.swift */; };
@@ -51,7 +52,7 @@
 		573AB07F081E05F0D2E768A4 /* AuthWelcomeTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWelcomeTitle.swift; sourceTree = "<group>"; };
 		603962550D9416A8C03F1F05 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		639C5AA69552117FD61064D1 /* EduKidGames.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EduKidGames.entitlements; sourceTree = "<group>"; };
-		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FFBC0DA5199E8FF6C6BCDBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidGamesApp.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 			files = (
 				2D59D1257BABBF133B5FF31F /* FirebaseCore in Frameworks */,
 				0067439849A5A63F6CF91194 /* FirebaseMessaging in Frameworks */,
+				9A3AE187574207CFC00BA527 /* DebugSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +264,7 @@
 			packageProductDependencies = (
 				7E55552F13E9F96ECAC43769 /* FirebaseCore */,
 				991017F2A57CD6D80F7295C9 /* FirebaseMessaging */,
+				F7011908FC0A24EB5B46D9E2 /* DebugSwift */,
 			);
 			productName = EduKidGames;
 			productReference = 7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */;
@@ -277,6 +280,7 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					20252FD233D89B78A3017CCC = {
+						DevelopmentTeam = ZDR75MUR47;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -292,6 +296,7 @@
 			mainGroup = 21CE071E32CAABE8143773BB;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				D167B017974FC7DE5EE54820 /* XCRemoteSwiftPackageReference "DebugSwift" */,
 				842C08CF78866FAB2CDB4902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -489,7 +494,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 33X3Q66JZJ;
+				DEVELOPMENT_TEAM = ZDR75MUR47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EduKidGames/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "EduKid Games";
@@ -515,7 +520,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 33X3Q66JZJ;
+				DEVELOPMENT_TEAM = ZDR75MUR47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EduKidGames/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "EduKid Games";
@@ -565,6 +570,14 @@
 				minimumVersion = 11.0.0;
 			};
 		};
+		D167B017974FC7DE5EE54820 /* XCRemoteSwiftPackageReference "DebugSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DebugSwift/DebugSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -577,6 +590,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 842C08CF78866FAB2CDB4902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		F7011908FC0A24EB5B46D9E2 /* DebugSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D167B017974FC7DE5EE54820 /* XCRemoteSwiftPackageReference "DebugSwift" */;
+			productName = DebugSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -152,30 +152,35 @@ struct LoginView: View {
     }
 
     private func login() {
-        performLogin {
-            try await AuthService.studentLogin(
-                email: email.trimmingCharacters(in: .whitespaces),
-                password: password
-            )
+        let trimmedEmail = email.trimmingCharacters(in: .whitespaces)
+        performLogin(credentialSaver: {
+            AuthSessionStore.saveStudentCredentials(email: trimmedEmail, password: password)
+        }) {
+            try await AuthService.studentLogin(email: trimmedEmail, password: password)
         }
     }
 
     private func guestLogin() {
-        performLogin {
+        performLogin(credentialSaver: {
+            AuthSessionStore.saveGuestCredentials()
+        }) {
             try await AuthService.guestStudentLogin()
         }
     }
 
-    private func performLogin(_ authCall: @escaping () async throws -> StudentAuthResult) {
+    private func performLogin(
+        credentialSaver: @escaping () -> Void,
+        authCall: @escaping () async throws -> StudentAuthResult
+    ) {
         guard !isLoading else { return }
         isLoading = true
         errorMessage = nil
+        AuthSessionStore.clearActiveSession()
         Task {
             do {
                 let auth = try await authCall()
-                try await AuthService.establishWebSession(accessToken: auth.accessToken)
-                AuthSessionStore.save(accessToken: auth.accessToken, userId: auth.userId)
-                AppDelegate.sendDeviceTokenToServerIfNeeded()
+                credentialSaver()
+                try await AuthSessionStore.completeAuthenticatedSession(auth: auth)
                 await MainActor.run {
                     isLoading = false
                     onLoggedIn()

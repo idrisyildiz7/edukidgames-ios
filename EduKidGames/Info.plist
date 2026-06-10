@@ -38,8 +38,12 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Fonts/Fredoka.ttf</string>
-		<string>Fonts/Nunito.ttf</string>
+		<string>Fredoka.ttf</string>
+		<string>Nunito.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
