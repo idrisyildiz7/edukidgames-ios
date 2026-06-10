@@ -18,6 +18,7 @@ enum AppConstants {
     static var establishWebSessionURL: String { apiBaseURL + "/api/auth/establish-web-session" }
     static var deviceTokenURL: String { apiBaseURL + "/api/mobile/device-token" }
     static let logoutPathPrefix = "/Account/Logout"
+    static let nativeBridgeHandlerName = "edukidNative"
 
     static let webViewUserAgent = "EduKidWebView/1.0 (iOS)"
     static let onboardingSeenKey = "edukid.onboarding.seen"

@@ -92,6 +92,10 @@ struct StudentWebView: UIViewRepresentable {
         config.mediaTypesRequiringUserActionForPlayback = []
         config.websiteDataStore = .default()
 
+        let userContentController = WKUserContentController()
+        userContentController.add(context.coordinator, name: AppConstants.nativeBridgeHandlerName)
+        config.userContentController = userContentController
+
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.customUserAgent = AppConstants.webViewUserAgent
         webView.isOpaque = false
@@ -117,7 +121,13 @@ struct StudentWebView: UIViewRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator(parent: self) }
 
-    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
+    static func dismantleUIView(_ webView: WKWebView, coordinator: Coordinator) {
+        webView.configuration.userContentController.removeScriptMessageHandler(
+            forName: AppConstants.nativeBridgeHandlerName
+        )
+    }
+
+    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
         var parent: StudentWebView
         weak var webView: WKWebView?
         private var didStartInitialLoad = false
@@ -132,6 +142,9 @@ struct StudentWebView: UIViewRepresentable {
         private static let externalSchemes: Set<String> = ["tel", "telprompt", "sms", "mailto", "facetime"]
 
         deinit {
+            webView?.configuration.userContentController.removeScriptMessageHandler(
+                forName: AppConstants.nativeBridgeHandlerName
+            )
             NotificationCenter.default.removeObserver(self)
         }
 
@@ -144,8 +157,27 @@ struct StudentWebView: UIViewRepresentable {
         }
 
         private func handleLogout(in webView: WKWebView) {
+            performNativeLogout(in: webView)
+        }
+
+        @MainActor
+        private func performNativeLogout(in webView: WKWebView) {
             pendingLogout = false
+            UserManager.shared.clear()
             WebCookieStore.clearAll(in: webView.configuration.websiteDataStore.httpCookieStore)
+        }
+
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            guard message.name == AppConstants.nativeBridgeHandlerName else { return }
+
+            let payload = message.body as? [String: Any]
+            let type = payload?["type"] as? String ?? (message.body as? String)
+            guard type == "logout" else { return }
+
+            guard let webView else { return }
+            Task { @MainActor in
+                performNativeLogout(in: webView)
+            }
         }
 
         func startInitialLoad(_ url: URL, in webView: WKWebView) {
@@ -321,6 +353,11 @@ struct StudentWebView: UIViewRepresentable {
             if let url = navigationAction.request.url {
                 if isLogoutPage(url) {
                     pendingLogout = true
+                    Task { @MainActor in
+                        performNativeLogout(in: webView)
+                    }
+                    decisionHandler(.cancel)
+                    return
                 }
                 applyZoomPolicy(for: url, in: webView)
             }
