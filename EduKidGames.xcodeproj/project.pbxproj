@@ -51,7 +51,7 @@
 		573AB07F081E05F0D2E768A4 /* AuthWelcomeTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWelcomeTitle.swift; sourceTree = "<group>"; };
 		603962550D9416A8C03F1F05 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		639C5AA69552117FD61064D1 /* EduKidGames.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EduKidGames.entitlements; sourceTree = "<group>"; };
-		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CB71021E5A9C09B7C92CB5F /* EduKidGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduKidGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C31E661DB9CED0A8BDC0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FFBC0DA5199E8FF6C6BCDBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		88EA4282EA10B4BABC63568B /* EduKidGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduKidGamesApp.swift; sourceTree = "<group>"; };
@@ -277,7 +277,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					20252FD233D89B78A3017CCC = {
-						DevelopmentTeam = ZDR75MUR47;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -490,7 +489,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZDR75MUR47;
+				DEVELOPMENT_TEAM = 33X3Q66JZJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EduKidGames/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "EduKid Games";
@@ -516,7 +515,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZDR75MUR47;
+				DEVELOPMENT_TEAM = 33X3Q66JZJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EduKidGames/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "EduKid Games";
