@@ -1,11 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
-    @State private var errorMessage: String?
-    @State private var isLoading = false
-    var onLoggedIn: () -> Void
+    @StateObject private var viewModel = LoginViewModel()
 
     var body: some View {
         ZStack {
@@ -39,7 +35,7 @@ struct LoginView: View {
             }
             .padding(.bottom, 18)
 
-            if let errorMessage {
+            if let errorMessage = viewModel.errorMessage {
                 HStack(alignment: .top, spacing: 10) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundStyle(Color(red: 0.725, green: 0.11, blue: 0.11))
@@ -59,21 +55,21 @@ struct LoginView: View {
                     title: "E-Posta Adresi",
                     placeholder: "ornek@hesap.com",
                     systemImage: "envelope.fill",
-                    text: $email
+                    text: $viewModel.form.email
                 )
 
                 AuthInputField(
                     title: "Şifre",
                     placeholder: "••••••••",
                     systemImage: "lock.fill",
-                    text: $password,
+                    text: $viewModel.form.password,
                     isSecure: true
                 )
             }
 
-            Button(action: login) {
+            Button(action: viewModel.login) {
                 Group {
-                    if isLoading {
+                    if viewModel.isLoading {
                         ProgressView().tint(.white)
                     } else {
                         Text("Sisteme Giriş Yap")
@@ -94,7 +90,7 @@ struct LoginView: View {
             .clipShape(Capsule())
             .shadow(color: EduKidColors.orange.opacity(0.35), radius: 11, y: 6)
             .padding(.top, 18)
-            .disabled(isLoading)
+            .disabled(viewModel.isLoading)
 
             HStack(spacing: 10) {
                 Rectangle()
@@ -109,7 +105,7 @@ struct LoginView: View {
             }
             .padding(.vertical, 16)
 
-            Button(action: guestLogin) {
+            Button(action: viewModel.guestLogin) {
                 HStack(spacing: 8) {
                     Image(systemName: "person.crop.circle.fill")
                     Text("Misafir olarak devam et")
@@ -132,7 +128,7 @@ struct LoginView: View {
                     .stroke(EduKidColors.teal.opacity(0.55), lineWidth: 2)
             )
             .shadow(color: EduKidColors.teal.opacity(0.16), radius: 8, y: 4)
-            .disabled(isLoading)
+            .disabled(viewModel.isLoading)
 
             Text("Demo öğrenci hesabıyla hızlıca giriş yap")
                 .font(.system(size: 12, weight: .bold))
@@ -149,43 +145,5 @@ struct LoginView: View {
                 .stroke(EduKidColors.outline, lineWidth: 1)
         )
         .shadow(color: EduKidColors.navy.opacity(0.1), radius: 16, y: 8)
-    }
-
-    private func login() {
-        performLogin {
-            try await AuthService.studentLogin(
-                email: email.trimmingCharacters(in: .whitespaces),
-                password: password
-            )
-        }
-    }
-
-    private func guestLogin() {
-        performLogin {
-            try await AuthService.guestStudentLogin()
-        }
-    }
-
-    private func performLogin(_ authCall: @escaping () async throws -> StudentAuthResult) {
-        guard !isLoading else { return }
-        isLoading = true
-        errorMessage = nil
-        Task {
-            do {
-                let auth = try await authCall()
-                try await AuthService.establishWebSession(accessToken: auth.accessToken)
-                AuthSessionStore.save(accessToken: auth.accessToken, userId: auth.userId)
-                AppDelegate.sendDeviceTokenToServerIfNeeded()
-                await MainActor.run {
-                    isLoading = false
-                    onLoggedIn()
-                }
-            } catch {
-                await MainActor.run {
-                    isLoading = false
-                    errorMessage = error.localizedDescription
-                }
-            }
-        }
     }
 }

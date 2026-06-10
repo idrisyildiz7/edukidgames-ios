@@ -1,29 +1,34 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject private var userManager: UserManager
     @AppStorage(AppConstants.onboardingSeenKey) private var hasSeenOnboarding = false
     @State private var showSplash = true
-    @State private var isLoggedIn: Bool? = nil
+    @State private var isAutoLogging = false
     @State private var deepLinkRoute: String?
 
     var body: some View {
         Group {
-            if showSplash {
+            if showSplash || isAutoLogging {
                 SplashView()
             } else if !hasSeenOnboarding {
                 OnboardingView()
-            } else if isLoggedIn == true {
+            } else if userManager.isLoggedIn {
                 StudentWebViewContainer(deepLinkRoute: deepLinkRoute)
             } else {
-                LoginView(onLoggedIn: { isLoggedIn = true })
+                LoginView()
             }
         }
         .onAppear {
             startSplashTimer()
-            if hasSeenOnboarding { restoreSession() }
+            if hasSeenOnboarding {
+                attemptAutoLogin()
+            }
         }
         .onChange(of: hasSeenOnboarding) { seen in
-            if seen { restoreSession() }
+            if seen {
+                attemptAutoLogin()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: .edukidPushDeepLink)) { note in
             deepLinkRoute = note.object as? String
@@ -34,28 +39,28 @@ struct RootView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + AppConstants.splashDuration) {
             withAnimation(.easeOut(duration: 0.3)) {
                 showSplash = false
-                if hasSeenOnboarding { restoreSession() }
             }
         }
     }
 
-    private func restoreSession() {
-        guard isLoggedIn != true else { return }
-        guard AuthSessionStore.isLoggedIn, AuthSessionStore.accessToken != nil else {
-            isLoggedIn = false
-            return
-        }
+    private func attemptAutoLogin() {
+        guard !isAutoLogging else { return }
+        guard !userManager.isLoggedIn else { return }
+        guard userManager.hasSavedCredentials else { return }
+
+        isAutoLogging = true
+        userManager.clearActiveSession()
+
         Task {
             do {
-                try await withTimeout(seconds: 10) {
-                    guard let token = AuthSessionStore.accessToken else { return }
-                    try await AuthService.establishWebSession(accessToken: token)
-                    AppDelegate.sendDeviceTokenToServerIfNeeded()
+                try await withTimeout(seconds: 15) {
+                    let auth = try await userManager.loginWithSavedCredentials()
+                    try await userManager.completeAuthenticatedSession(auth: auth)
                 }
-                await MainActor.run { isLoggedIn = true }
+                isAutoLogging = false
             } catch {
-                AuthSessionStore.clear()
-                await MainActor.run { isLoggedIn = false }
+                userManager.clear()
+                isAutoLogging = false
             }
         }
     }
