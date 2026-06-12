@@ -19,6 +19,8 @@ enum AppConstants {
     static var deviceTokenURL: String { apiBaseURL + "/api/mobile/device-token" }
     static let logoutPathPrefix = "/Account/Logout"
     static let nativeBridgeHandlerName = "edukidNative"
+    static let nativeBridgeLogoutType = "logout"
+    static let nativeBridgeDeleteAccountType = "delete_account"
 
     static let webViewUserAgent = "EduKidWebView/1.0 (iOS)"
     static let onboardingSeenKey = "edukid.onboarding.seen"
