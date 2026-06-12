@@ -3,7 +3,7 @@ import Foundation
 enum AppConstants {
     #if DEBUG
     #if targetEnvironment(simulator)
-    static let apiBaseURL = "https://edukidgames.com"
+    static let apiBaseURL = "http://localhost:5029"
     #else
     // Fiziksel cihaz: canlı sunucu (yerel IP/Mac sunucusu güvenilir değil)
     static let apiBaseURL = "https://edukidgames.com"
@@ -19,6 +19,8 @@ enum AppConstants {
     static var deviceTokenURL: String { apiBaseURL + "/api/mobile/device-token" }
     static let logoutPathPrefix = "/Account/Logout"
     static let nativeBridgeHandlerName = "edukidNative"
+    static let nativeBridgeLogoutType = "logout"
+    static let nativeBridgeDeleteAccountType = "delete_account"
 
     static let webViewUserAgent = "EduKidWebView/1.0 (iOS)"
     static let onboardingSeenKey = "edukid.onboarding.seen"
