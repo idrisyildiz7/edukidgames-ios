@@ -3,7 +3,7 @@ import Foundation
 enum AppConstants {
     #if DEBUG
     #if targetEnvironment(simulator)
-    static let apiBaseURL = "http://localhost:5029"
+    static let apiBaseURL = "https://edukidgames.com"
     #else
     // Fiziksel cihaz: canlı sunucu (yerel IP/Mac sunucusu güvenilir değil)
     static let apiBaseURL = "https://edukidgames.com"
