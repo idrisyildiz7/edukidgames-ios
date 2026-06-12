@@ -172,7 +172,9 @@ struct StudentWebView: UIViewRepresentable {
 
             let payload = message.body as? [String: Any]
             let type = payload?["type"] as? String ?? (message.body as? String)
-            guard type == "logout" else { return }
+            let isSessionEnd = type == AppConstants.nativeBridgeLogoutType
+                || type == AppConstants.nativeBridgeDeleteAccountType
+            guard isSessionEnd else { return }
 
             guard let webView else { return }
             Task { @MainActor in
